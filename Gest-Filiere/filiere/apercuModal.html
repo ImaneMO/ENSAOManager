@@ -1,0 +1,178 @@
+<!-- modale delete elemnt de module-->
+<div ng-controller="f_exportModalController" id="apercuModal" class="modal fade" ng-init="filiereTable.init()">
+    <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                    <div class="modal-header bg-success ">
+                        <h3 class="text-white"><strong>Apercue Filière</strong></h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+            <div class="modal-body">                    
+                <div class="panel-body">
+                        <table style=" width: 100%;">
+                                   <tbody ng-repeat="filiere in filiereTable.items() | filter : filiereTable.search">
+                                         <tr style=" white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"   class="{{filiere.status =='complet'?'tr_complet':'tr_incomplet'}} "  ng-class="{'tr_active' : filiereTable.selectedIndex == $index}" ng-mousedown="filiereTable.clicked($index,filiere._id,filiere.intitulee)" context-menu="filiereTable.menuOptions"  ng-click="filiereTable.clicked($index,filiere._id,filiere.intitulee)">
+                                            <td>
+                                                <div class="filiere">
+                                            
+                                              <button ng-show="infovisible[$index]" class="btn btn-white btn-sm text-success border-success  inline" ng-click="showfiliere($index)"><span class="ft ft-minus" title="plus de details"></button>
+                                              <button ng-hide="infovisible[$index]"  class="btn btn-white btn-sm text-success border-success  inline" ng-click="showfiliere($index)"><span class="ft ft-plus" title="plus de details"></span></button>        
+                                              <strong style="background-color :#ffffb3;">{{filiere.intitulee}}</strong>
+                                            </div>
+                                            </td>
+                                         </tr>
+                                    
+                                         <tr style=" white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" ng-show="infovisible[$index]"  class="{{filiere.status =='complet'?'tr_complet':'tr_incomplet'}} "   ng-class="{'tr_active' : filiereTable.selectedIndex == $index}" ng-mousedown="filiereTable.clicked($index,filiere._id,filiere.intitulee)" context-menu="filiereTable.menuOptions"  ng-click="filiereTable.clicked($index,filiere._id,filiere.intitulee)">
+                                                <td><span style="margin-left: 50px;">
+                                                        <button ng-show="anneevisible[$index]" class="btn btn-white btn-sm text-success border-success  inline" ng-click="showannee($index)"><span class="ft ft-minus" title="plus de details"></button>
+                                                        <button ng-hide="anneevisible[$index]" width="15%" class="btn btn-white btn-sm text-success border-success  inline" ng-click="showannee($index)"><span class="ft ft-plus" title="plus de details"></span></button>      
+                                                 
+                                                  <strong style="background-color : #AEFFD9;"> Année1</strong></span>
+                                                </td>
+                                         </tr>
+                                         <tr style=" white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" ng-show="infovisible[$index] && anneevisible[$index] "  class="{{filiere.status =='complet'?'tr_complet':'tr_incomplet'}} "    ng-class="{'tr_active' : filiereTable.selectedIndex == $index}" ng-mousedown="filiereTable.clicked($index,filiere._id,filiere.intitulee)" context-menu="filiereTable.menuOptions"  ng-click="filiereTable.clicked($index,filiere._id,filiere.intitulee)">
+                                                <td><span style="margin-left: 100px;">
+                                                  <button ng-show="svisible[$index]" class="btn btn-white btn-sm text-success border-success  inline" ng-click="shows($index)"><span class="ft ft-minus" title="plus de details"></button>
+                                                  <button ng-hide="svisible[$index]" width="15%" class="btn btn-white btn-sm text-success border-success  inline" ng-click="shows($index)"><span class="ft ft-plus" title="plus de details"></span></button>        
+                                                  <strong > S1</strong></span>
+                                                </td>
+                                         </tr>
+                                         <tr style=" white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"   ng-show="infovisible[$index] && anneevisible[$index] &&  svisible[$index] "  class="{{filiere.status =='complet'?'tr_complet':'tr_incomplet'}} "   ng-class="{'tr_active' : filiereTable.selectedIndex == $index}" ng-mousedown="filiereTable.clicked($index,filiere._id,filiere.intitulee)" context-menu="filiereTable.menuOptions"  ng-click="filiereTable.clicked($index,filiere._id,filiere.intitulee)">
+                                                <td><span ><ul><li style="margin-left: 150px;"><strong>
+                                                   <strong>Module</strong></li></ul></span>
+                                                </td>
+                                         </tr>
+                                         <tr  style=" white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"   ng-show="infovisible[$index] && anneevisible[$index] &&  svisible[$index] " class="{{filiere.status =='complet'?'tr_complet':'tr_incomplet'}} "   ng-class="{'tr_active' : filiereTable.selectedIndex == $index}" ng-mousedown="filiereTable.clicked($index,filiere._id,filiere.intitulee)" context-menu="filiereTable.menuOptions"  ng-click="filiereTable.clicked($index,filiere._id,filiere.intitulee)">
+                                                <td><div  ng-repeat="module in filiere.annee1.s1" style="margin-left: 150px;" >
+                                                  <button ng-show="mvisible[$index]" class="btn btn-white btn-sm text-success border-success  inline" ng-click="showm($index)"><span class="ft ft-minus" title="plus de details"></button>
+                                                    <button ng-hide="mvisible[$index]" width="15%" class="btn btn-white btn-sm text-success border-success  inline" ng-click="showm($index)"><span class="ft ft-plus" title="plus de details"></span></button>        
+                                                    
+                                                  <strong  >{{module.intitulee}}</strong>
+                                                  <ul ng-show="mvisible[$index]"><li style="margin-left: 200px;" ng-repeat="emodule in module.eModules">{{emodule.intitulee}}</li></ul>
+                                                  </div></td>
+                                         </tr>
+                                        
+                       
+                                   
+                                         <tr style=" white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"  ng-show="infovisible[$index] && anneevisible[$index] " class="{{filiere.status =='complet'?'tr_complet':'tr_incomplet'}} "   ng-class="{'tr_active' : filiereTable.selectedIndex == $index}" ng-mousedown="filiereTable.clicked($index,filiere._id,filiere.intitulee)" context-menu="filiereTable.menuOptions"  ng-click="filiereTable.clicked($index,filiere._id,filiere.intitulee)">
+                                                <td><span style="margin-left: 100px;">
+                                                  <button ng-show="s2visible[$index]" class="btn btn-white btn-sm text-success border-success  inline" ng-click="shows2($index)"><span class="ft ft-minus" title="plus de details"></button>
+                                                  <button ng-hide="s2visible[$index]" width="15%" class="btn btn-sm btn-white text-success border-success  inline" ng-click="shows2($index)"><span class="ft ft-plus" title="plus de details"></span></button>        
+                                                  <strong> S2</strong></span>
+                                                </td>
+                                         </tr>
+                                         <tr style=" white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"   ng-show="infovisible[$index] && anneevisible[$index] &&  s2visible[$index] "  class="{{filiere.status =='complet'?'tr_complet':'tr_incomplet'}} "   ng-class="{'tr_active' : filiereTable.selectedIndex == $index}" ng-mousedown="filiereTable.clicked($index,filiere._id,filiere.intitulee)" context-menu="filiereTable.menuOptions"  ng-click="filiereTable.clicked($index,filiere._id,filiere.intitulee)">
+                                            <td><span ><ul><li style="margin-left: 150px;"><strong>
+                                               <strong>Module</strong></li></ul></span>
+                                            </td>
+                                     </tr>
+                                     <tr  style=" white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"   ng-show="infovisible[$index] && anneevisible[$index] &&  s2visible[$index] " class="{{filiere.status =='complet'?'tr_complet':'tr_incomplet'}} "   ng-class="{'tr_active' : filiereTable.selectedIndex == $index}" ng-mousedown="filiereTable.clicked($index,filiere._id,filiere.intitulee)" context-menu="filiereTable.menuOptions"  ng-click="filiereTable.clicked($index,filiere._id,filiere.intitulee)">
+                                            <td><div  ng-repeat="module in filiere.annee1.s2" style="margin-left: 150px;" >
+                                              <button ng-show="m1visible[$index]" class="btn btn-white btn-sm text-success border-success  inline" ng-click="showm1($index)"><span class="ft ft-minus" title="plus de details"></button>
+                                                <button ng-hide="m1visible[$index]" width="15%" class="btn btn-white btn-sm text-success border-success  inline" ng-click="showm1($index)"><span class="ft ft-plus" title="plus de details"></span></button>        
+                                                
+                                              <strong  >{{module.intitulee}}</strong>
+                                              <ul ng-show="m1visible[$index]"><li style="margin-left: 200px;" ng-repeat="emodule in module.eModules">{{emodule.intitulee}}</li></ul>
+                                              </div></td>
+                                     </tr>
+                                         <!--aneee2-->
+                                         <tr style=" white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" ng-show="infovisible[$index]"  class="{{filiere.status =='complet'?'tr_complet':'tr_incomplet'}} "   ng-class="{'tr_active' : filiereTable.selectedIndex == $index}" ng-mousedown="filiereTable.clicked($index,filiere._id,filiere.intitulee)" context-menu="filiereTable.menuOptions"  ng-click="filiereTable.clicked($index,filiere._id,filiere.intitulee)">
+                                                <td><span style="margin-left: 50px;">
+                                                        <button ng-show="annee2visible[$index]" class="btn btn-white btn-sm text-success border-success  inline" ng-click="showannee2($index)"><span class="ft ft-minus" title="plus de details"></button>
+                                                        <button ng-hide="annee2visible[$index]" width="15%" class="btn btn-sm btn-white text-success border-success  inline" ng-click="showannee2($index)"><span class="ft ft-plus" title="plus de details"></span></button>      
+                                                 
+                                                  <strong style="background-color : #AEFFD9;"> Année2</strong></span>
+                                                </td>
+                                         </tr>
+                                         <tr style=" white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" ng-show="infovisible[$index] && annee2visible[$index] "  class="{{filiere.status =='complet'?'tr_complet':'tr_incomplet'}} "    ng-class="{'tr_active' : filiereTable.selectedIndex == $index}" ng-mousedown="filiereTable.clicked($index,filiere._id,filiere.intitulee)" context-menu="filiereTable.menuOptions"  ng-click="filiereTable.clicked($index,filiere._id,filiere.intitulee)">
+                                                <td><span style="margin-left: 100px;">
+                                                  <button ng-show="s3visible[$index]" class="btn btn-sm btn-white text-success border-success  inline" ng-click="shows3($index)"><span class="ft ft-minus" title="plus de details"></button>
+                                                  <button ng-hide="s3visible[$index]" width="15%" class="btn btn-white btn-sm text-success border-success  inline" ng-click="shows3($index)"><span class="ft ft-plus" title="plus de details"></span></button>        
+                                                  <strong> S1</strong></span>
+                                                </td>
+                                         </tr>
+                                         <tr style=" white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"   ng-show="infovisible[$index] && annee2visible[$index] &&  s3visible[$index] "  class="{{filiere.status =='complet'?'tr_complet':'tr_incomplet'}} "   ng-class="{'tr_active' : filiereTable.selectedIndex == $index}" ng-mousedown="filiereTable.clicked($index,filiere._id,filiere.intitulee)" context-menu="filiereTable.menuOptions"  ng-click="filiereTable.clicked($index,filiere._id,filiere.intitulee)">
+                                            <td><span ><ul><li style="margin-left: 150px;"><strong>
+                                               <strong>Module</strong></li></ul></span>
+                                            </td>
+                                     </tr>
+                                     <tr  style=" white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"   ng-show="infovisible[$index] && annee2visible[$index] &&  s3visible[$index] " class="{{filiere.status =='complet'?'tr_complet':'tr_incomplet'}} "   ng-class="{'tr_active' : filiereTable.selectedIndex == $index}" ng-mousedown="filiereTable.clicked($index,filiere._id,filiere.intitulee)" context-menu="filiereTable.menuOptions"  ng-click="filiereTable.clicked($index,filiere._id,filiere.intitulee)">
+                                            <td><div  ng-repeat="module in filiere.annee2.s1" style="margin-left: 150px;" >
+                                              <button ng-show="m2visible[$index]" class="btn btn-white btn-sm text-success border-success  inline" ng-click="showm($index)"><span class="ft ft-minus" title="plus de details"></button>
+                                                <button ng-hide="m2visible[$index]" width="15%" class="btn btn-white btn-sm text-success border-success  inline" ng-click="showm2($index)"><span class="ft ft-plus" title="plus de details"></span></button>        
+                                                
+                                              <strong  >{{module.intitulee}}</strong>
+                                              <ul ng-show="m2visible[$index]"><li style="margin-left: 200px;" ng-repeat="emodule in module.eModules">{{emodule.intitulee}}</li></ul>
+                                              </div></td>
+                                     </tr>
+                                    
+                   
+                               
+                                     <tr style=" white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"  ng-show="infovisible[$index] && annee2visible[$index] " class="{{filiere.status =='complet'?'tr_complet':'tr_incomplet'}} "   ng-class="{'tr_active' : filiereTable.selectedIndex == $index}" ng-mousedown="filiereTable.clicked($index,filiere._id,filiere.intitulee)" context-menu="filiereTable.menuOptions"  ng-click="filiereTable.clicked($index,filiere._id,filiere.intitulee)">
+                                            <td><span style="margin-left: 100px;">
+                                              <button ng-show="s4visible[$index]" class="btn btn-white btn-sm text-success border-success  inline" ng-click="shows4($index)"><span class="ft ft-minus" title="plus de details"></button>
+                                              <button ng-hide="s4visible[$index]" width="15%" class="btn btn-sm btn-white text-success border-success  inline" ng-click="shows4($index)"><span class="ft ft-plus" title="plus de details"></span></button>        
+                                              <strong> S2</strong></span>
+                                            </td>
+                                     </tr>
+                                     <tr style=" white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"   ng-show="infovisible[$index] && annee2visible[$index] &&  s4visible[$index] "  class="{{filiere.status =='complet'?'tr_complet':'tr_incomplet'}} "   ng-class="{'tr_active' : filiereTable.selectedIndex == $index}" ng-mousedown="filiereTable.clicked($index,filiere._id,filiere.intitulee)" context-menu="filiereTable.menuOptions"  ng-click="filiereTable.clicked($index,filiere._id,filiere.intitulee)">
+                                        <td><span ><ul><li style="margin-left: 150px;"><strong>
+                                           <strong>Module</strong></li></ul></span>
+                                        </td>
+                                 </tr>
+                                 <tr  style=" white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"   ng-show="infovisible[$index] && annee2visible[$index] &&  s4visible[$index] " class="{{filiere.status =='complet'?'tr_complet':'tr_incomplet'}} "   ng-class="{'tr_active' : filiereTable.selectedIndex == $index}" ng-mousedown="filiereTable.clicked($index,filiere._id,filiere.intitulee)" context-menu="filiereTable.menuOptions"  ng-click="filiereTable.clicked($index,filiere._id,filiere.intitulee)">
+                                        <td><div  ng-repeat="module in filiere.annee2.s2" style="margin-left: 150px;" >
+                                          <button ng-show="m3visible[$index]" class="btn btn-white btn-sm text-success border-success  inline" ng-click="showm3($index)"><span class="ft ft-minus" title="plus de details"></button>
+                                            <button ng-hide="m3visible[$index]" width="15%" class="btn btn-white btn-sm text-success border-success  inline" ng-click="showm3($index)"><span class="ft ft-plus" title="plus de details"></span></button>        
+                                            
+                                          <strong  >{{module.intitulee}}</strong>
+                                          <ul ng-show="m3visible[$index]"><li style="margin-left: 200px;" ng-repeat="emodule in module.eModules">{{emodule.intitulee}}</li></ul>
+                                          </div></td>
+                                 </tr>
+                                         
+                                         <!--annee2-->
+                                         <!--annee3-->
+                                         <tr style=" white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" ng-show="infovisible[$index]"  class="{{filiere.status =='complet'?'tr_complet':'tr_incomplet'}} "   ng-class="{'tr_active' : filiereTable.selectedIndex == $index}" ng-mousedown="filiereTable.clicked($index,filiere._id,filiere.intitulee)" context-menu="filiereTable.menuOptions"  ng-click="filiereTable.clicked($index,filiere._id,filiere.intitulee)">
+                                                <td><span style="margin-left: 50px;">
+                                                        <button ng-show="annee3visible[$index]" class="btn btn-white btn-sm text-success border-success  inline" ng-click="showannee3($index)"><span class="ft ft-minus" title="plus de details"></button>
+                                                        <button ng-hide="annee3visible[$index]" width="15%" class="btn btn-sm btn-white text-success border-success  inline" ng-click="showannee3($index)"><span class="ft ft-plus" title="plus de details"></span></button>      
+                                                 
+                                                  <strong style="background-color : #AEFFD9;"> Année3</strong></span>
+                                                </td>
+                                         </tr>
+                                         <tr style=" white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" ng-show="infovisible[$index] && annee3visible[$index] "  class="{{filiere.status =='complet'?'tr_complet':'tr_incomplet'}} "    ng-class="{'tr_active' : filiereTable.selectedIndex == $index}" ng-mousedown="filiereTable.clicked($index,filiere._id,filiere.intitulee)" context-menu="filiereTable.menuOptions"  ng-click="filiereTable.clicked($index,filiere._id,filiere.intitulee)">
+                                                <td><span style="margin-left: 100px;">
+                                                  <button ng-show="s5visible[$index]" class="btn btn-white text-success btn-sm border-success  inline" ng-click="shows5($index)"><span class="ft ft-minus" title="plus de details"></button>
+                                                  <button ng-hide="s5visible[$index]" width="15%" class="btn btn-white btn-sm text-success border-success  inline" ng-click="shows5($index)"><span class="ft ft-plus" title="plus de details"></span></button>        
+                                                  <strong> S1</strong></span>
+                                                </td>
+                                         </tr>
+                                         <tr style=" white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"   ng-show="infovisible[$index] && annee3visible[$index] &&  s5visible[$index] "  class="{{filiere.status =='complet'?'tr_complet':'tr_incomplet'}} "   ng-class="{'tr_active' : filiereTable.selectedIndex == $index}" ng-mousedown="filiereTable.clicked($index,filiere._id,filiere.intitulee)" context-menu="filiereTable.menuOptions"  ng-click="filiereTable.clicked($index,filiere._id,filiere.intitulee)">
+                                            <td><span ><ul><li style="margin-left: 150px;"><strong>
+                                               <strong>Module</strong></li></ul></span>
+                                            </td>
+                                     </tr>
+                                     <tr  style=" white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"   ng-show="infovisible[$index] && annee3visible[$index] &&  s5visible[$index] " class="{{filiere.status =='complet'?'tr_complet':'tr_incomplet'}} "   ng-class="{'tr_active' : filiereTable.selectedIndex == $index}" ng-mousedown="filiereTable.clicked($index,filiere._id,filiere.intitulee)" context-menu="filiereTable.menuOptions"  ng-click="filiereTable.clicked($index,filiere._id,filiere.intitulee)">
+                                            <td><div  ng-repeat="module in filiere.annee3.s1" style="margin-left: 150px;" >
+                                              <button ng-show="m4visible[$index]" class="btn btn-white btn-sm text-success border-success  inline" ng-click="showm4($index)"><span class="ft ft-minus" title="plus de details"></button>
+                                                <button ng-hide="m4visible[$index]" width="15%" class="btn btn-white btn-sm text-success border-success  inline" ng-click="showm4($index)"><span class="ft ft-plus" title="plus de details"></span></button>        
+                                                
+                                              <strong  >{{module.intitulee}}</strong>
+                                              <ul ng-show="m4visible[$index]"><li style="margin-left: 200px;" ng-repeat="emodule in module.eModules">{{emodule.intitulee}}</li></ul>
+                                              </div></td>
+                                     </tr>
+                                    
+                   
+                               
+                                    
+                                         <!--annee3-->
+          
+                         
+                                    </tbody>    
+                               </table>             
+                       
+                 </div>
+        </div>
+    </div>
+</div>

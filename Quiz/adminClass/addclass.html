@@ -1,0 +1,47 @@
+<div class="app-content content" style="margin-left:15%;margin-right:15%">
+    <div class="content-wrapper">
+        <div class="content-header row">
+            <div class="content-header-left col-md-6 col-12 mb-2">
+            </div>
+        </div>
+        <div class="content-body">
+            <section id="description" class="card">
+                <div class="card-header">
+                    <h4 class="card-title">
+                        <span class="badge bg-info">importer une classe d'étudiants</span>
+                    </h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                                    <a href="../../classesuploads/template/classe.xlsx" class="btn btn-float btn-float-lg btn-cyan" title="Télécharger un exemple de modèle." target="_self" download>
+                                        <i class="fa fa-cloud-download"></i>
+                                        <b>Télécharger</b>
+                                    </a>
+                        <div style="margin-left:15%;margin-right:15%">
+                            <form class="form" method="POST" action="/uploadclass" enctype="multipart/form-data">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="form-group col-12 mb-2">
+                                            <label>Choisir un fichier</label>
+                                            <label class="custom-file center-block block">
+                                                <input type="file" class="form-control" name="myFile" required/>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-actions" align="center">
+                                    <button type="reset" class="btn btn-warning mr-1" title="Annuler l'import">
+                                        <i class="ft-x"></i> Annuler
+                                    </button>
+                                    <button type="submit" class="btn btn-primary" title="Enregistrer l'import">
+                                        <i class="fa fa-check-square-o"></i> Enregistrer
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

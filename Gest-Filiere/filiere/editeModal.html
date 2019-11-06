@@ -1,0 +1,187 @@
+<!-- modale edite elemnt de module-->
+
+
+
+<div ng-controller="f_editeModalController" id="editeModal" class="modal fade">
+  
+
+        <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+           <div class="modal-header bg-success">
+           <h3 class="modal-title  text-white" id="myModalLabel1">
+             <strong>Modifier Filière</strong>
+           </h3>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+           </button>
+         </div>
+             
+   
+           <div class="modal-body">
+               <form name='editeForm' role="form" novalidate>
+                   <div class="panel panel-primary">        
+                              <h4 class="panel-title">
+                              <label for="basicInput"><strong>Intitulée</strong></label>
+                              </h4>
+                                <div class="col-md-8">
+                              <div class="form-group" ng-class="{ 'has-error' : edite.validation.taken || (editeForm.intitulee.$invalid &&  editeForm.intitulee.$touched)}">
+                                   <input id="intitulee" class="form-control" type="text" name="intitulee" placeholder="Intituléé" ng-model="edite.req.intitulee" ng-focus="edite.validation.taken = false" ng-minlength="3" required>
+                                   <p ng-show="edite.validation.taken" class="help-block">intitulee existe deja !!.</p>
+                                   <p ng-show="editeForm.intitulee.$error.minlength && editeForm.intitulee.$touched" class="help-block">intitulee trop court !!.</p>
+                                   <p ng-show="editeForm.intitulee.$invalid &&  editeForm.intitulee.$touched" class="help-block">intitulee obligatoire !!.</p>
+                              </div>
+                       </div>    
+                   </div>
+                   <br/>
+                           <div class="panel panel-primary">
+                           <div class="panel-heading">
+                               <h4 class="panel-title">
+                                   <label for="3annee"><strong>3éme année</strong></label>
+                               </h4>
+                           </div>
+                           <div class="panel-body">
+                                <div class="col-md-9">
+                                       <h5>
+                                           <span class="label label-success"><strong>Premier Semestre</strong></span>
+                                       </h5>
+                                       <select id="modules" class="selectpicker show-tick form-control" multiple data-selected-text-format="count" title="..." data-live-search="true"
+                                           ng-options="module.intitulee  for module in modules()" ng-model="edite.req.annee1.s1">
+                                       </select>
+                                       <h4 ng-repeat="currentModule in edite.currentModules.annee1.s1">
+                                           
+                                           <span class="label label-info">
+                                              {{currentModule.intitulee}}
+                                               <button type="button" class="btn btn-info btn-xs" ng-click="edite.removeCurrentM($index,'annee1','s1')">
+                                                   <span class="ft ft-trash" aria-hidden="true"></span>
+                                               </button>
+                                           </span>
+                                       
+                                       </h4>
+                                   </div>
+                                   <div class="col-md-9">
+                                       <h5>
+                                           <span class="label label-success"><strong>Deuxième Semestre</strong></span>
+                                       </h5>
+                                       <select id="modules" class="selectpicker show-tick form-control" multiple data-selected-text-format="count" title="..." data-live-search="true"
+                                           ng-options="module.intitulee  for module in modules()" ng-model="edite.req.annee1.s2">
+                                       </select>
+                                       <h4 ng-repeat="currentModule in edite.currentModules.annee1.s2">
+                                           <span class="label label-info">
+                                               {{currentModule.intitulee}}
+                                               <button type="button" class="btn btn-info btn-xs" ng-click="edite.removeCurrentM($index,'annee1','s2')">
+                                                   <span class="ft ft-trash" aria-hidden="true"></span>
+                                               </button>
+                                           </span>
+                                       </h4>
+                                   </div>
+                               </div>
+                           </div>
+                       
+                           <br/>
+                              <div class="panel panel-primary">
+                           <div class="panel-heading">
+                               <h4 class="panel-title">
+                                   <label for="4annee"><strong>4éme année</strong></label>
+                               </h4>
+                           </div>
+                           <div class="panel-body">
+                               <div class="col-md-9">
+                                       <h5>
+                                           <span class="label label-success"><strong>Premier Semestre</strong></span>
+                                       </h5>
+                                       <select id="modules" class="selectpicker show-tick form-control" multiple data-selected-text-format="count" title="..." data-live-search="true"
+                                           ng-options="module.intitulee  for module in modules()" ng-model="edite.req.annee2.s1">
+                                       </select>
+                                       <h4 ng-repeat="currentModule in edite.currentModules.annee2.s1">
+                                           <span class="label label-info">
+                                               {{currentModule.intitulee}}
+                                               <button type="button" class="btn btn-info btn-xs" ng-click="edite.removeCurrentM($index,'annee2','s1')">
+                                                   <span class="ft ft-trash" aria-hidden="true"></span>
+                                               </button>
+                                           </span>
+                                       </h4>
+                                   </div>
+                                  <div class="col-md-9">
+                                       <h5>
+                                           <span class="label label-success"><strong>deuxième semestre</strong></span>
+                                       </h5>
+                                       <select id="modules" class="selectpicker show-tick form-control" multiple data-selected-text-format="count" title="..." data-live-search="true"
+                                           ng-options="module.intitulee  for module in modules()" ng-model="edite.req.annee2.s2">
+                                       </select>
+                                       <h4 ng-repeat="currentModule in edite.currentModules.annee2.s2">
+                                           <span class="label label-info">
+                                               {{currentModule.intitulee}}
+                                               <button type="button" class="btn btn-info btn-xs" ng-click="edite.removeCurrentM($index,'annee2','s2')">
+                                                   <span class="ft ft-trash" aria-hidden="true"></span>
+                                               </button>
+                                           </span>
+                                       </h4>
+                                   </div>
+                               </div>
+                           </div>
+   
+                           <br/>
+                                <div class="panel panel-primary">
+                           <div class="panel-heading">
+                               <h4 class="panel-title">
+                                   <label for="5annee"><strong>5éme année</strong></label>
+                               </h4>
+                           </div>
+                           <div class="panel-body">
+                                  <div class="col-md-9">
+                                       <h5>
+                                           <span class="label label-success"><strong>Premier Semestre</strong></span>
+                                       </h5>
+                                       <select id="modules" class="selectpicker show-tick form-control" multiple data-selected-text-format="count" title="..." data-live-search="true"
+                                           ng-options="module.intitulee  for module in modules()" ng-model="edite.req.annee3.s1">
+                                       </select>
+                                       <h4 ng-repeat="currentModule in edite.currentModules.annee3.s1">
+                                           <span class="label label-info">
+                                               {{currentModule.intitulee}}
+                                               <button type="button" class="btn btn-info btn-xs" ng-click="edite.removeCurrentM($index,'annee3','s1')">
+                                                   <span class="ft ft-trash" aria-hidden="true"></span>
+                                               </button>
+                                           </span>
+                                       </h4>
+                                   </div>
+                                     <div class="col-md-9">
+                                       <h5>
+                                           <span class="label label-success"><strong>deuxième semestre</strong></span>
+                                       </h5>
+                                       <select id="modules" class="form-control selectpicker show-tick" multiple data-selected-text-format="count" title="..." data-live-search="true"
+                                           ng-options="module.intitulee  for module in modules()" ng-model="edite.req.annee3.s2">
+                                       </select>
+                                       <h4 ng-repeat="currentModule in edite.currentModules.annee3.s2">
+                                           <span class="label label-info">
+                                               {{currentModule.intitulee}}
+                                               <button type="button" class="btn btn-info btn-xs" ng-click="edite.removeCurrentM($index,'annee3','s2')">
+                                                   <span class="ft ft-trash" aria-hidden="true"></span>
+                                               </button>
+                                           </span>
+                                       </h4>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+   
+                           <br/>
+						   <div class="modal-footer">
+                   <button class="btn btn-primary" ng-click="edite.submit(editeForm.$pristine)" ng-disabled="editeForm.$invalid">Valider</button>
+                   <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="edite.annuler()">Annuler</button>
+                   <div class="col-xs-6 col-sm-3">
+                       <select class="form-control" ng-model="edite.req.status">
+                           <option>complet</option>
+                           <option>incomplet</option>
+                       </select>
+                   </div>
+               </div>
+                       </div>
+					   
+                   </div>
+               </form>
+			   
+           </div>
+        </div>
+        </div>  
+   </div>
+   

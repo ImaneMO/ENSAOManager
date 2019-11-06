@@ -1,0 +1,115 @@
+<div class="app-content content" style="margin-left:10%;margin-right:10%">
+    <div class="content-wrapper">
+        <div class="content-header row">
+            <div class="content-header-left col-md-6 col-12 mb-2">
+            </div>
+        </div>
+        <div class="content-body">
+            <section id="description" class="card">
+                <div class="card-header">
+                    <h4 class="card-title">
+                        <span class="badge bg-info">LISTE DE QCM DISPONIBLE À PASSER</span>
+                    </h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <span class="badge bg-success">QCM disponible pour passer</span>
+                        <table class="table table-bordered table-hover" st-table="displayedCollection1" st-safe-src="validQCM">
+                            <tbody>
+                                <tr ng-repeat="qcm1 in displayedCollection1">
+                                    <td align="center">
+                                        <button class="btn btn-primary" ng-click="selectTopic(qcm1._id)" title='Cliquez ici'> {{qcm1.name}}</button>
+                                    </td>
+                                    <td>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <b>Nombre de Questions :</b>
+                                                </td>
+                                                <td align="center">
+                                                    <span class="badge bg-info">{{qcm1.count}} questions</span>
+                                                </td>
+                                                <td>
+                                                    <b>Temps :</b>
+                                                </td>
+                                                <td align="center">
+                                                    <span class="badge bg-warning">{{qcm1.time}} minutes</span>
+                                                </td>
+                                                <td>
+                                                    <b>Date de Début :</b>
+                                                </td>
+                                                <td>
+                                                    <span class="badge bg-primary">{{qcm1.startDate | date: 'yyyy-MM-dd HH:mm:ss Z'}}</span>
+                                                </td>
+                                                <td>
+                                                    <b>Date de Fin :</b>
+                                                </td>
+                                                <td>
+                                                    <span class="badge bg-success">{{qcm1.endDate | date: 'yyyy-MM-dd HH:mm:ss Z'}}</span>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="8" class="text-center">
+                                        <div st-pagination="" st-items-by-page="2" st-displayed-pages="5"></div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <span class="badge bg-pink">QCM Expiré ou Encore à Venir</span>
+                        <table class="table table-bordered table-hover" st-table="displayedCollection2" st-safe-src="expiredQCM">
+                            <tbody>
+                                <tr ng-repeat="qcm2 in displayedCollection2">
+                                    <td align="center">
+                                        <button class="btn btn-secondary" disabled> {{qcm2.name}}</button>
+                                    </td>
+                                    <td>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <b>Nombre de Questions :</b>
+                                                </td>
+                                                <td align="center">
+                                                    <span class="badge bg-seconadry">{{qcm2.count}} questions</span>
+                                                </td>
+                                                <td>
+                                                    <b>Temps :</b>
+                                                </td>
+                                                <td align="center">
+                                                    <span class="badge bg-seconadry">{{qcm2.time}} minutes</span>
+                                                </td>
+                                                <td>
+                                                    <b>Date de Début :</b>
+                                                </td>
+                                                <td>
+                                                    <span class="badge bg-seconadry">{{qcm2.startDate | date: 'yyyy-MM-dd HH:mm:ss Z'}}</span>
+                                                </td>
+                                                <td>
+                                                    <b>Date de Fin :</b>
+                                                </td>
+                                                <td>
+                                                    <span class="badge bg-seconadry">{{qcm2.endDate | date: 'yyyy-MM-dd HH:mm:ss Z'}}</span>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="8" class="text-center">
+                                        <div st-pagination="" st-items-by-page="2" st-displayed-pages="5"></div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

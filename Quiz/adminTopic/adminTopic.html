@@ -1,0 +1,81 @@
+<div class="app-content content" style="margin-left:10%;margin-right:10%">
+    <div class="content-wrapper">
+        <div class="content-header row">
+            <div class="content-header-left col-md-6 col-12 mb-2">
+            </div>
+        </div>
+        <div class="content-body">
+            <section id="description" class="card">
+                <div class="card-header">
+                    <h4 class="card-title">
+                        <span class="badge bg-info">Gestion QCM</span>
+                    </h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+
+                        <button aria-label="a" title="Ajouter un examen QCM" style="float:left" class="btn btn-cyan" ng-click="addTopic($event)">
+                            Ajouter un QCM
+                        </button>
+                        <br>
+                        <br>
+                        <table class="table table-bordered table-hover" st-table="displayedCollection" st-safe-src="topics" class="table table-bordered"
+                            style="border:1px solid #ddd">
+                            <thead class="bg-info">
+                                <th scope="col">Nom de QCM</th>
+                                <th scope="col">Nbr Questions</th>
+                                <th scope="col">Temps (minutes)</th>
+                                <th scope="col">Classe</th>
+                                <th scope="col">Date Début</th>
+                                <th scope="col">Date Fin</th>
+                                <th scope="col">Actions</th>
+                            </thead>
+
+                            <tbody>
+                                <tr ng-repeat="topic in displayedCollection">
+                                    <td style="text-align:center" class="col-sm-2">
+                                        <input class="form-control" type="text" ng-model="topic.name" aria-label="a">
+                                    </td>
+                                    <td style="text-align:left" class="col-sm-2">
+                                        <input class="form-control" type="number" ng-model="topic.count" aria-label="a">
+                                    </td>
+                                    <td style="text-align:left" class="col-sm-2">
+                                        <input class="form-control" type="number" ng-model="topic.time" aria-label="a">
+                                    </td>
+                                    <td style="text-align:left" class="col-sm-2">
+                                        <select class="form-control" ng-model="topic.niveau" multiple>
+                                            <option ng-value="{{n}}" ng-repeat="n in niveaux">{{n}}</option>
+                                        </select>
+                                    </td>
+                                    <td style="text-align:center" class="col-sm-2">
+                                        <b>{{topic.startDate | date: "dd-MM-yyyy HH:mm:ss 'GMT'Z"}}</b>
+                                        <input class="form-control" type="datetime-local" ng-model="topic.startDate">
+                                    </td>
+                                    <td style="text-align:center" class="col-sm-2">
+                                        <b>{{topic.endDate | date: "dd-MM-yyyy HH:mm:ss 'GMT'Z"}}</b>
+                                        <input class="form-control" type="datetime-local" ng-model="topic.endDate">
+                                    </td>
+                                    <td style="text-align:center" class="col-sm-2">
+                                        <button aria-label="a" title="Mettre à jour" class="btn btn-success" ng-click="updateTopic(topic._id)">
+                                            <i class="ft-save"></i>
+                                        </button><br><br>
+                                        <button aria-label="a" title="Supprimer" class="btn btn-pink" ng-click="removeTopic(topic._id,$event)">
+                                            <i class="ft-trash-2"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="7" class="text-center">
+                                        <div st-pagination="" st-items-by-page="3" st-displayed-pages="5"></div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

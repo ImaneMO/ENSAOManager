@@ -1,0 +1,63 @@
+
+<!-- u can remove the above -->
+<div class="app-content content" style="margin-left:15%;margin-right:15%">
+    <div class="content-wrapper">
+        <div class="content-header row">
+            <div class="content-header-left col-md-6 col-12 mb-2">
+            </div>
+        </div>
+        <div class="content-body">
+            <section id="description" class="card">
+                <div class="card-header">
+                    <h4 class="card-title">
+                        <span class="badge bg-info">le score de tous les QCM passés</span>
+                    </h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <div ng-show="showResults">
+                            <table class="table table-bordered table-hover" st-table="displayedCollection" st-safe-src="results">
+                                <thead class="bg-danger">
+                                    <th class="col-sm-3">QCM </th>
+                                    <th class="col-sm-3">Résultat</th>
+                                    <th class="col-sm-3">Date</th>
+                                </thead>
+                                <tbody class="tb-content">
+                                    <tr ng-repeat="percent in displayedCollection">
+                                        <td>
+                                            <b>{{percent.quizTopic}}</b>
+                                        </td>
+                                        <td>
+                                            <b>{{percent.userResult}}</b>
+                                        </td>
+                                        <td>
+                                            <b>{{percent.date | date: "yyyy-MM-dd HH:mm:ss 'GMT'Z"}}</b>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="3" class="text-center">
+                                            <div st-pagination="" st-items-by-page="5" st-displayed-pages="5"></div>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div ng-show="errShow">
+                            <div layout='row' layout-align="center center">
+                                <h3 style="margin-top: 40px; margin-bottom: 100px;">
+                                    <div class="alert alert-secondary mb-2" role="alert">
+                                        <i class="ft-alert-triangle"></i>&nbsp;
+                                        <b>{{showError}}</b>
+                                    </div>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<!-- u can remove the following -->

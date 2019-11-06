@@ -1,0 +1,102 @@
+<div class="app-content content" style="margin-left:15%;margin-right:15%">
+    <div class="content-wrapper">
+        <div class="content-header row">
+            <div class="content-header-left col-md-6 col-12 mb-2">
+            </div>
+        </div>
+        <div class="content-body">
+            <section id="description" class="card">
+                <div class="card-header">
+                    <h4 class="card-title">
+                        <span class="badge bg-info">la liste des classes</span>
+                    </h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <div ng-show="listeclasses">
+                            <!-- Add a Class -->
+                            <a ui-sref="addclass"> <button aria-label="a" title="Ajouter une classe" style="float:left" class="btn btn-primary"> Ajouter une Classe
+                            </button></a>
+                            <br><br>
+                            <!-- Show list of Classes -->
+                            <table class="table table-bordered table-hover" st-table="displayedCollection" st-safe-src="niveaux">
+                                <thead class="bg-danger">
+                                    <tr>
+                                        <th scope="col">Classe</th>
+                                        <th scope="col">Nombre d'étudiants</th>
+                                        <th scope="col">Liste des étudiants</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="n in displayedCollection | orderBy:niveau ">
+                                        <td align="center"><b>{{n.niveau}}</b></td>
+                                        <td align="center"><b>{{n.nombre}}</b></td>
+                                        <td align="center">
+                                            <button class="btn btn-success" ng-click="showListStudents(n.niveau)" title="Afficher la liste des étudiants">
+                                                <strong style="color:white">Afficher la liste des étudiants</strong>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="3" class="text-center">
+                                            <div st-pagination="" st-items-by-page="3" st-displayed-pages="5"></div>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div ng-show="detailclasses===false;">
+                            <button class="btn btn-warning" style="margin-top: 0px;" title="revenir en arrière" ng-click="back2classes()">
+                                <i class="icon-action-undo"></i>
+                            </button>
+                            <br><br>
+                            <!-- Show list of Students -->
+                            <table class="table table-bordered table-hover" st-table="displayedCollection" st-safe-src="etudiants">
+                                <thead class="bg-success">
+                                    <tr>
+                                        <th scope="col">Nom</th>
+                                        <th scope="col">Prénom</th>
+                                        <th scope="col">Username</th>
+                                        <th scope="col">E-mail</th>
+                                        <th scope="col">Niveau</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="e in displayedCollection | orderBy:'nom' ">
+                                        <td align="center"><b>{{e.nom}}</b></td>
+                                        <td align="center"><b>{{e.prenom}}</b></td>
+                                        <td align="center"><b>{{e.login}}</b></td>
+                                        <td align="center"><b>{{e.email}}</b></td>
+                                        <td align="center"><b>{{e.niveau}}</b></td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="5" class="text-center">
+                                            <div st-pagination="" st-items-by-page="7" st-displayed-pages="5"></div>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div ng-show="errShow">
+                            <button class="btn btn-primary" style="margin-top: 0px;" title="revenir en arrière" ng-click="back2classes()">
+                                <i class="icon-action-undo"></i>
+                            </button>
+                            <div layout='row' layout-align="center center">
+                                <h3 style="margin-top: 40px; margin-bottom: 100px;">
+                                    <div class="alert alert-secondary mb-2" role="alert">
+                                        <i class="ft-alert-triangle"></i>&nbsp;
+                                        <b>{{showError}}</b>
+                                    </div>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,55 @@
+<div ng-controller="f_headerController" ng-init="">
+        <div class="content-body">
+        <section class="card">
+        <div class="card-content">
+         <div class="navbar navbar-expand-sm bg-success" role="navigation">
+         <legend class="navbar-brand text-white">
+         <h2><strong>
+        <span class="ft ft-book"></span>
+        Gestion Filiere
+        </strong></h2>
+        </legend>
+         <!-- import du fichier excel -->
+         <div class="btn-group" role="group">
+                        <button type="button" class="btn bg-white text-success border-success" data-toggle="modal" data-toggle="tooltip" title="Crée une filiere" data-target="#creeModal"
+                                ng-show="user().security_mask>1" ng-click="cree()">
+                                <span class="ft ft-plus" aria-hidden="false"></span>
+                        </button>
+                        <a class="btn btn-white text-success border-success" href="/FiliereUpload" title="Importer Filiere"><span class="ft ft-download  text-success "></span></a>
+                        <a class="btn btn-white text-success border-success" href="/FiliereDownload/files" title="Exporter filiere sous format xlsx"><span class="ft ft-upload  text-success "></span></a>
+						<button type="button" class="btn btn-white text-success border-success" data-toggle="modal" data-toggle="tooltip" title='"{{filiere.intitulee}}"'
+                    data-target="#apercuModal" ng-click="apercu()">
+                    <span class="ft ft-eye" aria-hidden="true"></span>
+                    </button>
+
+
+                </div>
+                               
+                        </div>
+        </div>
+
+        <nav class="navbar navbar-light" style="background-color : #AEFFD9;"></nav>
+ 
+        <div class="navbar-header" style="margin-top:1%;margin-left:0%">
+        <br>
+        <nav class="navbar navbar-light" style="background-color :  #AEFFD9;">
+                        <table class="text-centered text-success">
+                                <tr>
+                                        <td><legend><h2><strong>Liste Filière </strong></h2></legend></td>
+                                        <td><strong>
+                                        <div role="group" class="btn-group pull-right" width="80%">
+                                        <form class="form-inline my-2 my-lg-0">
+                                        <!--<input type="text" class="form-control border-success " placeholder="Rechercher par intitulée ..." ng-change='reportChange()' ng-model='search' ng-hide="false">-->
+                                        </form>
+                                        </div>
+                                </strong></td>
+                                </tr>
+                                
+                       
+                                </table>
+
+                                </nav>
+        </div>
+
+        
+</div>

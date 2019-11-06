@@ -1,0 +1,90 @@
+<div class="app-content content" style="margin-left:15%;margin-right:15%">
+    <div class="content-wrapper">
+        <div class="content-header row">
+            <div class="content-header-left col-md-6 col-12 mb-2">
+            </div>
+        </div>
+        <div class="content-body">
+            <section id="description" class="card">
+                <div class="card-header">
+                    <h4 class="card-title">
+                        <span class="badge bg-info">Profil de l'Étudiant</span>
+                    </h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <table class="table table-hover">
+                            <thead class="bg-secondary">
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td align="left">
+                                        <b>Nom :</b>
+                                    </td>
+                                    <td align="center">
+                                        <span class="badge bg-danger">{{dData.nom}}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left">
+                                        <b>Prénom :</b>
+                                    </td>
+                                    <td align="center">
+                                        <span class="badge bg-danger">{{dData.prenom}}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left">
+                                        <b>Username :</b>
+                                    </td>
+                                    <td align="center">
+                                        <span class="badge bg-primary">{{dData.login}}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left">
+                                        <b>Adresse e-mail:</b>
+                                    </td>
+                                    <td align="center">
+                                        <span class="badge bg-info">{{dData.email}}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left">
+                                        <b>Niveau :</b>
+                                    </td>
+                                    <td align="center">
+                                        <span class="badge bg-warning">{{dData.niveau}}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left">
+                                        <b>Date d'inscription :</b>
+                                    </td>
+                                    <td align="center">
+                                        <span class="badge bg-success">{{dData.Date | date: 'medium'}}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" colspan="2">
+                                        <button class="btn btn-info" ui-sref="updatepassword" title="Modifier le mot de passe">Modifier le mot de passe</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td align="center" colspan="2" class="bg-secondary">
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

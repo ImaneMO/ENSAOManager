@@ -1,0 +1,189 @@
+<div class="app-content content" style="margin-left:15%;margin-right:15%">
+    <div class="content-wrapper">
+        <div class="content-header row">
+            <div class="content-header-left col-md-6 col-12 mb-2">
+            </div>
+        </div>
+        <div class="content-body">
+            <section id="description" class="card">
+                <div class="card-header">
+                    <h4 class="card-title">
+                        <span class="badge bg-info">Statistiques</span>
+                    </h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <div ng-show="nivqcms">
+                            <table class="table table-bordered table-hover" st-table="displayedCollection" st-safe-src="mjrqcms">
+                                <thead class="bg-success">
+                                    <th scope="col">Classe</th>
+                                    <th scope="col">Liste des QCM affecter</th>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="c in displayedCollection | orderBy:'classe'">
+                                        <td align="center">
+                                            <p class="bg-primary">
+                                                <strong style="color:white">{{c.classe}}</strong>
+                                            </p>
+                                        </td>
+                                        <td align="center">
+                                            <button ng-repeat="q in c.qcms" type="button" class="btn btn-pink round btn-min-width mr-1 mb-1" title="Montrer les Statistiques"
+                                                ng-click="showQCMStatistics(c.classe,q)">{{q}}</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="2" class="text-center">
+                                            <div st-pagination="" st-items-by-page="5" st-displayed-pages="5"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div ng-show="statsqcm">
+                            <button class="btn btn-warning" style="margin-top: 0px;" title="revenir en arrière" ng-click="back2classes()">
+                                <i class="icon-action-undo"></i>
+                            </button>
+                            <br>
+                            <br>
+                            <p class="bg-pink" align="center">
+                                <strong style="color:white">{{classe}}</strong>
+                            </p>
+                            <p class="bg-info" align="center">
+                                <strong style="color:white">{{qcm}}</strong>
+                            </p>
+
+                            <table class="table table-bordered table-hover">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="col-xl-3 col-lg-6 col-12">
+                                                <div class="card bg-primary">
+                                                    <div class="card-content">
+                                                        <div class="card-body">
+                                                            <div class="media d-flex">
+                                                                <div class="align-self-center">
+                                                                    <i class="ft-edit white font-large-2 float-left"></i>
+                                                                </div>
+                                                                <div class="media-body white text-right">
+                                                                    <h3>{{nbrP}}</h3>
+                                                                    <span>Nbr d'étudiants</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3 col-lg-6 col-12">
+                                                <div class="card bg-danger">
+                                                    <div class="card-content">
+                                                        <div class="card-body">
+                                                            <div class="media d-flex">
+                                                                <div class="align-self-center">
+                                                                    <i class="ft-plus-square white font-large-2 float-left"></i>
+                                                                </div>
+                                                                <div class="media-body white text-right">
+                                                                    <h3>{{scoreMax}} %</h3>
+                                                                    <span>Score Maximum</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3 col-lg-6 col-12">
+                                                <div class="card bg-success">
+                                                    <div class="card-content">
+                                                        <div class="card-body">
+                                                            <div class="media d-flex">
+                                                                <div class="align-self-center">
+                                                                    <i class="ft-minus-square white font-large-2 float-left"></i>
+                                                                </div>
+                                                                <div class="media-body white text-right">
+                                                                    <h3>{{scoreMin}} %</h3>
+                                                                    <span>Score Minimum</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3 col-lg-6 col-12">
+                                                <div class="card bg-warning">
+                                                    <div class="card-content">
+                                                        <div class="card-body">
+                                                            <div class="media d-flex">
+                                                                <div class="align-self-center">
+                                                                    <i class="ft-percent white font-large-2 float-left"></i>
+                                                                </div>
+                                                                <div class="media-body white text-right">
+                                                                    <h3>{{ScoreAvg}} %</h3>
+                                                                    <span>Score Moyen</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                </tfoot>
+                            </table>
+
+                            <table class="table table-bordered table-hover" st-table="displayedCollection" st-safe-src="QCMResult">
+                                <thead class="bg-secondary">
+                                    <th scope="col">Nom</th>
+                                    <th scope="col">Prénom</th>
+                                    <th scope="col">Résultats</th>
+                                    <th scope="col">Date &nbsp;
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="result in displayedCollection">
+                                        <td align="center">
+                                            <b>{{result.nom}}</b>
+                                        </td>
+                                        <td align="center">
+                                            <b>{{result.prenom}}</b>
+                                        </td>
+                                        <td align="center">
+                                            <b>{{result.userResult}}</b>
+                                        </td>
+                                        <td align="center">
+                                            <b>{{result.date | date: "dd-MM-yyyy HH:mm:ss Z"}}</b>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="4" class="text-center">
+                                            <div st-pagination="" st-items-by-page="5" st-displayed-pages="5"></div>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div ng-show="errShow">
+                            <button class="btn btn-warning" style="margin-top: 0px;" title="revenir en arrière" ng-click="back2classes()">
+                                <i class="icon-action-undo"></i>
+                            </button>
+                            <div layout='row' layout-align="center center">
+                                <h3 style="margin-top: 40px; margin-bottom: 100px;">
+                                    <div class="alert alert-secondary mb-2" role="alert">
+                                        <i class="ft-alert-triangle"></i>&nbsp;
+                                        <b>{{showError}}</b>
+                                    </div>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

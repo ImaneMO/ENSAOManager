@@ -1,0 +1,137 @@
+<div style="margin-right:0%;margin-left:0%">
+<div ng-controller="f_filiereTableController" class="table-responsive" ng-init="filiereTable.init()">
+    <table class="table table-striped table-bordered zero-configuration" style="background-color:#AEFFD9 ; width: 100%;">
+        <thead class="bg-success " >
+                <tr  >
+                    <th class="white" width="10%"><legend><h4><strong></strong></h4></legend></th>
+                    <th class="white" width="35%"><legend><h4><strong>Intitulée</strong></h4></legend></th>
+                    <th class="white" width="35%"><legend><h4><strong>Responsable</strong></h4></legend></th>
+                    <th class="white" width="45%" ><legend><h4><strong>Dernière modification</strong></h4></legend></th>
+                    <th class="white" width="45%"><legend><h4><strong>Détail</strong></h4></legend></th>
+                    <th class="white" width="45%"><legend><h4><strong></strong></h4></legend></th>
+                 </tr>
+        </thead>
+           <tbody ng-repeat="filiere in filiereTable.items() | filter : filiereTable.search">
+                 <tr   style="white-space: nowrap;" class="{{filiere.status =='complet'?'tr_complet':'tr_incomplet'}} "  ng-class="{'tr_active' : filiereTable.selectedIndex == $index}" ng-mousedown="filiereTable.clicked($index,filiere._id,filiere.intitulee)" context-menu="filiereTable.menuOptions"  ng-click="filiereTable.clicked($index,filiere._id,filiere.intitulee)">
+                    <td><h4><strong>{{$index+1}}</strong></h4></td>
+                    <td><h4><strong>{{filiere.intitulee}}</strong></h4></td>
+                    <td><h4><strong>{{responsable(filiere.responsable).length==0?'vous' :responsable(filiere.responsable)[0].nom+' '+responsable(filiere.responsable)[0].prenom}}
+                      </strong></h4></td>
+                    <td><h4><strong>{{filiere.lastUpdate | date:'dd/MM/yyyy HH:mm:ss'}}</strong></td>
+                    <td><button ng-show="infovisible[$index]" class="btn btn-white text-success border-success  inline" ng-click="showinfo($index)"><span class="ft ft-minus" title="plus de details">
+                    </button>
+                    <button ng-hide="infovisible[$index]" width="15%" class="btn btn-white text-success border-success  inline" ng-click="showinfo($index)"><span class="ft ft-plus" title="plus de details">
+                    </button></td>
+                    <td>
+                        <div ng-controller="f_headerController" ng-init="">
+               
+                       <div class="navbar-form">
+                      
+                        <div class="btn-toolbar  navbar-right">
+                                <div class="btn-group" role="group" >
+                                        <button type="button" class="btn btn-success" data-toggle="modal" data-toggle="modal" title='Editer "{{filiereList()[selectedItemIndex()].intitulee}}"'
+                                                data-target="#editeModal" ng-click="edite()">
+                                                <span class="ft ft-edit" ></span>
+                                        </button>
+                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-toggle="modal" title='Supprimer "{{filiereList()[selectedItemIndex()].intitulee}}"'
+                                                data-target="#deleteModal">
+                                                <span class="ft ft-trash-2" ></span>
+                                        </button>
+                                </div>
+                                
+                        </div>
+                         </div>
+                </div>
+                </td>
+                 </tr>
+                 <tr  ng-show="infovisible[$index]" class="encadrer " style="background-color:#FFF9D4;white-space: nowrap;">
+               
+                  <td class="success"><legend><h4><i><strong>Année</strong></i></h4></legend></td>
+                  <td class="success"><legend><h4><i><strong>Semestre</strong></i></h4></legend></td>
+                  <td class="success"><legend><h4><i><strong>Module</strong></i></h4></legend></td>
+                  <td class="success"><legend><h4><i><strong>Element module</strong></i></h4></legend></td>
+                  <td></td>
+                  <td></td>
+                  
+                </tr>
+                <tr ng-show="infovisible[$index]" class="encadrer"   style="background-color:#E1FFF1 ; white-space: nowrap;">
+                
+                  <td class="secondary"><legend><h4><strong>Année 1</strong></h4></legend></td>
+                  <td class="secondary"><legend><h4><strong>S1</strong></h4></legend></td>
+                  <td>
+                    <ul>
+                      <li ng-repeat="module in filiere.annee1.s1">{{module.intitulee}}</li>
+                  </ul>
+                  </td>
+                  <td><ul><li  style="white-space: nowrap;" ng-repeat="module in filiere.annee1.s1">
+                      <div ng-repeat="emodule in module.eModules">{{emodule.intitulee}}</div>
+                    </li></ul>
+                  </td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr ng-show="infovisible[$index]" class="encadrer " style="background-color:#E1FFF1 ; white-space: nowrap;">
+                    <td class="secondary"><legend><h4><strong>Année 1</strong></h4></legend></td>
+                      <td class="secondary"><legend><h4><strong>S2</strong></h4></legend></td>
+                  <td>
+                    <ul>
+                      <li ng-repeat="module in filiere.annee1.s2">{{module.intitulee}}</li>
+                  </ul>
+                  </td>
+                  <td><ul><li  style="white-space: nowrap;" ng-repeat="module in filiere.annee1.s2">
+                      <div ng-repeat="emodule in module.eModules">{{emodule.intitulee}}</div>
+                    </li></ul>
+                  </td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr ng-show="infovisible[$index]" class="encadrer" style="background-color:#E1FFF1 ; white-space: nowrap;">
+                  <td class="secondary"><legend><h4><strong>Année 2</strong></h4></legend></td>
+                  <td class="secondary"><legend><h4><strong>S1</strong></h4></legend></td>
+                  <td>
+                    <ul>
+                      <li style="white-space: nowrap;" ng-repeat="module in filiere.annee2.s1">{{module.intitulee}}</li>
+                  </ul>
+                  </td>
+                  <td><ul><li  style="white-space: nowrap;" ng-repeat="module in filiere.annee2.s1">
+                      <div ng-repeat="emodule in module.eModules">{{emodule.intitulee}}</div>
+                    </li></ul>
+                  </td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr ng-show="infovisible[$index]" class="encadrer " style="background-color:#E1FFF1 ; white-space: nowrap;">
+                  <td class="secondary"><legend><h4><strong>Année 2</strong></h4></legend></td>
+                  <td class="secondary"><legend><h4><strong>S2</strong></h4></legend></td>
+                  <td>
+                    <ul>
+                      <li ng-repeat="module in filiere.annee2.s2">{{module.intitulee}}</li>
+                  </ul>
+                  </td>
+                  <td><ul><li  style="white-space: nowrap;" ng-repeat="module in filiere.annee2.s2">
+                      <div ng-repeat="emodule in module.eModules">{{emodule.intitulee}}</div>
+                    </li></ul>
+                  </td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr ng-show="infovisible[$index]" class="encadrer" style="background-color:#E1FFF1 ; white-space: nowrap;">
+
+                  <td class="secondary"><legend><h4><strong>Année 3</strong></h4></legend></td>
+                  <td class="secondary"><legend><h4><strong>S1</strong></h4></legend></td>
+                  <td>
+                    <ul>
+                      <li ng-repeat="module in filiere.annee3.s1">{{module.intitulee}}</li>
+                  </ul>
+                  </td>
+                  <td><ul><li  style="white-space: nowrap;" ng-repeat="module in filiere.annee3.s1">
+                      <div ng-repeat="emodule in module.eModules">{{emodule.intitulee}}</div>
+                    </li></ul>
+                  </td>
+                  <td></td>
+                  <td></td>
+                </tr>
+            </tbody>    
+       </table>   
+</div>
+</div>    

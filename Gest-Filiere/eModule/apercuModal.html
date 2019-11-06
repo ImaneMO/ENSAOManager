@@ -1,0 +1,108 @@
+<!-- modale delete elemnt de module-->
+<div ng-controller="e_apercuModalController" id="apercuModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary ">
+				<h3 class="text-white"><strong>Descriptif de l'élément de module</strong></h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                    <h4><strong><label for="intitulee">Intitulée:</label></strong></h4>
+                            <h5 class="btn btn-lg btn-block btn-outline-primary"><strong>{{eModule.intitulee}}</strong></h5>
+                    </i></h3>
+                    <hr>
+                <div class="panel panel-primary">
+                    <!--<div class="panel-heading">
+                        <h3 class="panel-title">
+                            <label>COMPOSITION</label>
+                        </h3>
+                    </div>-->
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <!--<label>Enseignement-->
+                                <h4><strong>Volume horaire :</strong></h4><br/>
+                            <!--</label>-->
+							<table>
+                            <tr>
+                                <td width="25%">
+                                   <h5 class="btn btn-lg btn-block btn-outline-primary"><strong>Cours : {{eModule.volume_horaire.cour}}</strong></h5>
+                         		</td>
+                                <td width="25%">
+									<h5 class="btn btn-lg btn-block btn-outline-primary"><strong>Td : {{eModule.volume_horaire.td}}</strong></h5>
+								</td>
+                                <td width="25%">
+									<h5 class="btn btn-lg btn-block btn-outline-primary"><strong>Tp : {{eModule.volume_horaire.tp}}</strong></h5>
+								</td>
+                                <td width="30%">
+                                    <h5 class="btn btn-lg btn-block btn-outline-primary"><strong>Total: {{eModule.volume_horaire.cour+eModule.volume_horaire.td+eModule.volume_horaire.tp}}</strong></h5>
+                                </td>
+                            </tr>
+							</table>
+                        </div>
+						
+						<hr>
+                        <div class="clearfix"></div>
+                        <br>
+                        <div class="form-group"> 
+                            <label for='libellee'><h4><strong>Activités pratiques</strong></h4></label>
+                                <h5>Durée en jours</h5>
+                            <div ng-repeat="activitee in eModule.activitees_pratique" class="form-group">
+                                <div class="form-group col-sm-12">
+                                    <div class="form-group">
+                                        <label for="libellee">Libellée</label>
+                                        <pre>{{activitee.libellee}}</pre>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="libellee">Objectif</label>
+                                        <pre>{{activitee.objectif}}</pre>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div>
+                                        <div class="help">Travaux de terrain</div>
+                                        <pre class="text-center">{{activitee.travaux_terrain}}</pre>
+                                    </div>
+                                    <div>
+                                        <div class="help">Projets Hors PFE</div>
+                                        <pre class="text-center">{{activitee.projet}}</pre>
+                                    </div>
+                                    <div>
+                                        <div class="help">Stage</div>
+                                        <pre class="text-center">{{activitee.stage}}</pre>
+                                    </div>
+                                    <div>
+                                        <div class="help">Visites d'études</div>
+                                        <pre class="text-center">{{activitee.visite_etude}}</pre>
+                                    </div>
+                                    <div>
+                                        <h6 class="text-center">TOTAL : {{activitee.travaux_terrain+activitee.projet+activitee.stage+activitee.visite_etude}}</h6>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <label for="objectifs"><h4><strong>Contenu</strong></h4></label>
+                                <h5><span class="label label-info">Description du programme</span></h5>
+                            
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <pre>{{eModule.description_programme}}</pre>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="modal-footer">
+                <button class="btn btn-info" ng-class="printDocument()">Print</button>
+            </div>-->
+        </div>
+    </div>
+</div>

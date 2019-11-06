@@ -1,0 +1,67 @@
+<div class="app-content content" style="margin-left:15%;margin-right:15%">
+    <div class="content-wrapper">
+        <div class="content-header row">
+            <div class="content-header-left col-md-6 col-12 mb-2">
+            </div>
+        </div>
+        <div class="content-body">
+            <section id="description" class="card">
+                <div class="card-header">
+                    <h4 class="card-title">
+                        <span class="badge bg-info">modifier le mot de passe</span>
+                    </h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <div style="margin-left:20%;margin-right:20%">
+                            <form class="form-simple" ng-submit="submit()" novalidate>
+                                <table class="table table-hover">
+                                    <thead class="bg-danger">
+                                        <tr>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <b>Nouveau mot de passe :</b>
+                                            </td>
+                                            <td>
+                                                <fieldset class="form-group position-relative has-icon-left">
+                                                    <input type="password" ng-model="password1" class="form-control round" placeholder="Entrez votre nouveau mot de passe" required>
+                                                    <div class="form-control-position">
+                                                        <i class="fa fa-key warning"></i>
+                                                    </div>
+                                                </fieldset>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>Confirmez le mot de passe :</b>
+                                            </td>
+                                            <td>
+                                                <fieldset class="form-group position-relative has-icon-left">
+                                                    <input type="password" ng-model="password2" class="form-control round" placeholder="Confirmez le mot de passe" required>
+                                                    <div class="form-control-position">
+                                                        <i class="fa fa-key warning"></i>
+                                                    </div>
+                                                </fieldset>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <hr>
+                                <div layout="row" layout-align="center center">
+                                    <button class="btn btn-danger" type="reset" title="Réinitialiser">RÉINITIALISER</button>&nbsp;&nbsp;
+                                    <button class="btn btn-success" type="submit" title="Enregistrer">ENREGISTRER</button>
+                                </div>
+                                <hr>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

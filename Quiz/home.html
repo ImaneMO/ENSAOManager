@@ -1,0 +1,220 @@
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<div  data-spy="scroll" data-target="#navbar-example2" data-offset="0" data-scroll-to-active="true" class="main-menu menu-fixed menu-dark menu-accordion menu-shadow">
+    <div class="main-menu-content">
+        <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main" ng-controller="questionsElmt" >  //ng-init="eModuleTable.init()"
+            <li class="navigation-header">
+                <span class="active">Gestion Questions</span>
+                <i data-toggle="tooltip" data-placement="right" data-original-title="General" class=" ft-minus"></i>
+            </li>
+            <li class="nav-item">
+                <a ui-sref=".acceuil">
+                    <i class="ft-home"></i>
+                    <span data-i18n="" class="menu-title"><strong>Acceuil</strong></span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a ui-sref=".adminClass">
+                    <i class="fa fa-search"></i>
+                    <span data-i18n="" class="menu-title"><strong>Classes</strong></span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a ui-sref=".dashboard">
+                    <i class="fa fa-user"></i>
+                    <span data-i18n="" class="menu-title"><strong>Etudiants</strong></span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a ui-sref=".adminTopic">
+                    <i class="fa fa-info"></i>
+                    <span data-i18n="" class="menu-title"><strong>QCM</strong></span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a ui-sref=".adminQuestions">
+                    <i class="fa fa-user-o"></i>
+                    <span data-i18n="" class="menu-title"><strong>Questions</strong></span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a ui-sref=".statistics">
+                    <i class="ft-calendar"></i>
+                    <span data-i18n="" class="menu-title"><strong>Statistiques</strong></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="app-content content">
+    <div class="content-wrapper">
+        <div class="content-body">
+            <section class="card">
+                <div class="card-content">
+                    <div ui-view></div>
+                </div>
+            </section>
+        </div>
+            <!-- comment ----------------------------------------------->
+        <!-- comment
+    <div>
+        <ul>
+            <li class="nav-item" ng-repeat="eModule in eModuleTable.items() | filter : eModuleTable.search">
+                <a ng-href="/app/#!/quiz/questions/{{eModule._id}}">
+                <i class="ft-calendar"></i>
+                <span data-i18n="" class="menu-title">{{eModule.intitulee}}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    </div>
+    <div class="app-content content" ng-controller="questionsElmt">
+    <div class="content-wrapper">
+        <div class="content-body">
+            <section id="description" class="card">
+                <div class="card-header">
+                <h4 class="card-title">Gestion Questions : <span style="color:red;">{{elmtMo[0].intitulee}}</span> </h4>
+                </div>
+                <div class="container">
+                    <button class="btn btn-success" ng-click="showAdd()">Ajouter Question</button>
+                    <div style="float: right;">
+                        <input type="text" class="form-control" ng-model="searchQues" placeholder="Recherche question">
+                    </div>
+                    <select ng-model="pageSize" class="mt-2 col-sm-1 form-control">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+                <div class="card-content">
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <thead class="bg-secondary">
+                            <tr>
+                            <th class="white" ng-click="trier('')"># <i ng-class="selectedCls('')"></i></th>
+                            <th class="white" ng-click="trier('partie')">Partie <i ng-class="selectedCls('partie')"></i></th>
+                            <th class="white" ng-click="trier('questionText')">Question <i ng-class="selectedCls('questionText')"></i></th>
+                            <th class="white" ng-click="trier('type')">Type <i ng-class="selectedCls('type')"></i></th>
+                            <th class="white">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="quest in questions | filter:searchQues:false | orderBy:orderby.filtre:orderby.asc | startFrom:currentPage*pageSize | limitTo:pageSize">
+                            <td>{{questions.indexOf(quest)}}</td>
+                            <td ng-if="quest.partie">{{getPartieName(quest.partie)}}</td>
+                            <td ng-if="! quest.partie">Generale</td>
+                            <td>{{quest.questionText}}</td>
+                            <td>{{quest.type}}</td>
+                            <td>
+                                <div class="btn-group" role="group" >
+                                    
+                                    <button type="button"  class="btn btn-success" data-toggle="modal" title='Editer "{{quest.questionText}}"' data-target="#editeModal" ng-click="updateQuestionShow(questions.indexOf(quest))">
+                                    <span class="ft ft-edit" ></span>
+                                    </button>
+                                    <button type="button" class="btn btn-danger"  title='Supprimer "{{quest.questionText}}"' ng-click="deleteQuestion(quest._id)">
+                                    <span class="ft ft-trash-2" ></span>
+                                    </button>
+                                </div>
+                            </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <nav>
+                            <ul class="pagination">
+                              <li class="page-item" ng-class="currentPage==0 ? 'disabled':''" >
+                                <a class="page-link" ng-click="currentPage=currentPage-1">Precedent</a>
+                              </li>
+                              <li ng-repeat="pg in [] | range:numberOfPages()"  class="page-item" ng-class="currentPage==pg ? 'active':''" >
+                                    <a class="page-link" ng-click="setcurrentPage(pg)" >{{pg+1}}</a>
+                              </li>
+                              <li class="page-item" ng-class="currentPage == numberOfPages()-1 ? 'disabled':''">
+                                    <a class="page-link" ng-click="currentPage=currentPage+1">Suivant</a>
+                              </li>
+                            </ul>
+                    </nav>
+                </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div ng-if="isShow" class="modal fade show" style="padding-right: 17px; display: block;" id="creeModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel1">
+                    <strong ng-if="isShow=='add'">Créer Question</strong>
+                    <strong ng-if="isShow=='edit'">Modifier Question</strong>
+                    <span style="color:red;">{{elmtMo[0].intitulee}}</span>
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" ng-click="annuler()" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                <form class="form">
+                    <div class="form-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="typeQues">Type<span style="color:red">*</span></label>
+                                <select id="typeQues" ng-model="question.type" class="form-control">
+                                    <option value="Unique">Unique</option>
+                                    <option value="MultiChoix">MultiChoix</option>
+                                    <option value="Formule">Formule</option>
+                                </select>
+                            </div>
+                            </div>
+                            <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="partieQues">Partie</label>
+                                <select id="partieQues" ng-model="question.partie" class="form-control">
+                                    <option ng-repeat="par in parties" ng-value="par._id">{{par.partieText}}</option>
+                                </select>
+                            </div>
+                            </div>
+                            <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="partieQues">Ajouter Partie</label>
+                                <div class="row container btn-group">
+                                    <input type="text" ng-model="partie.partieText" class="form-control col-sm-8"/>
+                                    <button ng-click="AjouterPartie()" class="btn btn-success">+</button>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="questionText">Question<span style="color:red">*</span></label>
+                            <textarea rows="3" ng-model="question.questionText" id="questionText" class="form-control" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="reponsesQues">Reponses<span style="color:red">*</span></label>
+                            <div class="row container btn-group">
+                            <input type="text" ng-model="question.reponse" class="form-control col-sm-4"/>
+                            <button ng-click="AjouterRep()" class="btn btn-success">+</button>
+                            </div>
+                            <ul>
+                            <li ng-repeat="rep in question.reponses">
+                                <input ng-if="question.type=='MultiChoix'" type="checkbox" ng-model="reponses[reponses.indexOf(rep)].isTrue"  />
+                                <input ng-if="question.type=='Unique'" type="radio" ng-model="question.isTrue" ng-value="reponses.indexOf(rep)" />
+                                <span ng-if="question.type=='Formule'">{{reponses[reponses.indexOf(rep)].reponse}}</span>
+                                <span ng-if="question.type!='Formule'">{{reponses[reponses.indexOf(rep)].reponse}}</span>
+                                <button class="btn btn-danger btn-sm" ng-click="deleteRep(reponses.indexOf(rep))">x</button>
+                            </li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+                </div>
+                <div class="modal-footer">
+                <button class="btn btn-info" ng-if="isShow=='add'" ng-click="submit()">Valider</button>   
+                <button class="btn btn-info" ng-if="isShow=='edit'" ng-click="updateQuestion(question._id)">Modifier</button>   
+                <button type="button" class="btn btn-warning" data-dismiss="modal" ng-click="annuler()">Annuler</button>
+                </div>
+
+            </div>
+        </div>  -->
+    </div>
+   <script src="Quiz/controller.js"></script>  <!-- where is CDN -->
+</div>

@@ -1,0 +1,152 @@
+<div class="app-content content" style="margin-left:15%;margin-right:15%">
+  <div class="content-wrapper">
+    <div class="content-header row">
+      <div class="content-header-left col-md-6 col-12 mb-2">
+      </div>
+    </div>
+    <div class="content-body">
+      <section id="description" class="card">
+        <div class="card-header">
+          <h4 class="card-title">
+            <span class="badge bg-info">Liste Des Questions</span>
+          </h4>
+          <br>
+          <table class="table">
+            <tbody>
+              <td align="center">
+                <select class="form-control" id="basicSelect" ng-model="topic" aria-label="a" ng-change="filterByTopic()">
+                  <option value="All">
+                    <p>Toutes les questions</p>
+                  </option>
+                  <option ng-repeat="item in topics" ng-value="item.name">
+                    <strong>{{item.name}}</strong>
+                  </option>
+                </select>
+              </td>
+              <td align="center">
+                <button class="btn btn-pink btn-lg btn-block" style="margin-bottom:20px;width:50%" ng-click="addQuestion()" title="Ajouter une Question">Ajouter une Question
+                </button>
+              </td>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-content">
+          <div class="card-body">
+            <table class="table table-bordered" st-table="displayedCollection" st-safe-src="questions">
+              <tbody>
+                <tr class="expandcollapse-item" ng-repeat="question in displayedCollection">
+                  <td>
+                    <div ng-click="selectQuestion($index, $event)" ng-class="{'expandcollapse-heading-collapsed': flags[$index], 'expandcollapse-heading-expanded': !flags[$index]}">
+                      <p>
+                        <strong class="red">{{$index + 1}} : </strong>{{question.question}}
+                        <button style="float:right" aria-label="a" class="btn btn-success" ng-click="removeQuestion($index, $event)" title="Supprimer">
+                          <i class="ft-trash-2"></i>
+                        </button>
+                      </p>
+
+                    </div>
+
+                    <div class="slideDown" ng-hide="flags[$index]" style="padding:20px">
+                      <div class="expand-collapse-content">
+                        <form ng-submit="submit()">
+
+                          <div class="form-group">
+                            <md-radio-group layout="row" ng-model="updateQuestion.questionType">
+
+                              <md-radio-button value="multiple" class="md-primary">Multiple Choice</md-radio-button>
+                              <md-radio-button value="single" class="md-accent"> Single Choice </md-radio-button>
+                              <md-radio-button value="fill" class="md-warn"> Fill in </md-radio-button>
+
+                            </md-radio-group>
+
+                          </div>
+                          <div class="form-group">
+                            <textarea style="width: 100%;resize: none;" class="form-control" rows="5" ng-model="updateQuestion.question" id="comment"
+                              placeholder="Enter Your Question"></textarea>
+                          </div>
+                          <br>
+                          <div ng-if="updateQuestion.questionType == 'single'" class="div-small" align="center">
+
+                            <input type="radio" ng-model="updateQuestion.rightAnswer" value="op1">
+                            <md-input-container>
+                              <input type="text" aria-label="a" ng-model="updateQuestion.op1">
+                            </md-input-container>
+                            <input type="radio" ng-model="updateQuestion.rightAnswer" value="op2">
+                            <md-input-container>
+                              <input type="text" aria-label="a" name="" ng-model="updateQuestion.op2">
+                            </md-input-container>
+                            <input type="radio" ng-model="updateQuestion.rightAnswer" value="op3">
+                            <md-input-container>
+                              <input type="text" aria-label="a" name="" ng-model="updateQuestion.op3">
+                            </md-input-container>
+                            <input type="radio" ng-model="updateQuestion.rightAnswer" value="op4">
+                            <md-input-container>
+                              <input type="text" aria-label="a" name="" ng-model="updateQuestion.op4">
+                            </md-input-container>
+                            <br/>
+
+                          </div>
+                          <div ng-if="updateQuestion.questionType== 'multiple'" class="div-small">
+                            <input type="checkbox" checklist-model="answers" value="op1">
+                            <md-input-container>
+                              <input type="text" aria-label="a" name="" ng-model="updateQuestion.op1">
+                            </md-input-container>
+                            <input type="checkbox" checklist-model="answers" value="op2">
+                            <md-input-container>
+                              <input type="text" aria-label="a" name="" ng-model="updateQuestion.op2">
+                            </md-input-container>
+                            <input type="checkbox" checklist-model="answers" value="op3">
+                            <md-input-container>
+                              <input type="text" aria-label="a" name="" ng-model="updateQuestion.op3">
+                            </md-input-container>
+                            <input type="checkbox" checklist-model="answers" value="op4">
+                            <md-input-container>
+                              <input type="text" aria-label="a" name="" ng-model="updateQuestion.op4">
+                            </md-input-container>
+                            <br/>
+                          </div>
+                          <div ng-if="updateQuestion.questionType== 'fill'" class="div-small">
+                            <md-switch ng-model="updateQuestion.case" aria-label="Switch 1" style="margin:0px">
+                              Case Sensitive: {{ updateQuestion.case }}
+                            </md-switch>
+                            <md-input-container>
+                              <input type="text" aria-label="a" name="" ng-model="updateQuestion.op1">
+                            </md-input-container>
+                            <md-input-container>
+                              <input type="text" aria-label="a" name="" ng-model="updateQuestion.op2">
+                            </md-input-container>
+                            <md-input-container>
+                              <input type="text" aria-label="a" name="" ng-model="updateQuestion.op3">
+                            </md-input-container>
+                            <md-input-container>
+                              <input type="text" aria-label="a" name="" ng-model="updateQuestion.op4">
+                            </md-input-container>
+                          </div>
+                          <div class="row form-group">
+                            <md-select ng-model="topicNames[$index]" class="col-sm-3 col-sm-offset-3" placeholder="Sélectionnez QCM">
+                              <md-option ng-repeat="item in topics" value="{{item.name}}">
+                                {{item.name}}
+                              </md-option>
+                            </md-select>
+                            <md-button class="md-raised md-primary col-sm-3" type="submit" style="margin-top:20px" ng-click="updateQuestionFunc($index)">mettre à jour</md-button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="5" class="text-center">
+                    <div st-pagination="" st-items-by-page="4" st-displayed-pages="5"></div>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,95 @@
+    <div ng-controller="e_headerController" role="navigation" ng-init="">
+      <div class="navbar-header" style="margin-top:1%;margin-left:0%">
+            <div class="content-body">
+                    <section class="card">
+                        <div class="card-content">
+                                <div class="navbar navbar-expand-sm bg-primary" role="navigation">
+                                        <legend class="navbar-brand text-white">
+                                          <h1><strong>
+                                            <span class="fa fa-tasks"></span>
+                                              Gestion Elément Module
+                                          </strong></h1>
+                                        </legend>
+                
+                                        <button type="button" class="btn btn-white border-primary" data-toggle="modal" data-toggle="tooltip" title="Créer Elément de Module" data-target="#creeModal" ng-show="user().security_mask>1" ng-click="cree()">
+                                                <span class="ft ft-plus text-primary" aria-hidden="false"></span>
+                                        </button> 
+                
+                                        
+                                </div>
+                                <nav class="navbar navbar-light" style="background-color :#b2dfdb;"></nav>
+                                <div class="navbar-header" style="margin-top:1%;">
+                                <br>
+                                <nav class="navbar navbar-light" style="background-color : #b2dfdb;">
+                                        <table class="text-centered text-primary">
+                                                <td><legend><h2><strong>Liste Eléments Modules </strong></h2></legend></td>
+                
+                                                <td> 
+                                                        <div role="group" class="btn btn-lg pull-right" width="60%">
+                                                                <form class="form-inline my-2 my-lg-0">
+                                                                
+                                            <input type="text" class="form-control border-primary " placeholder="Rechercher par intitulée ..." ng-change='reportChange()' ng-model='search' ng-hide="false">
+                                                                    </form>
+                                                                    </div>
+
+                                                </td>
+                                              </table>
+                                </nav>
+                        
+        <div class="collapse navbar-collapse navbar-ex1-collapse" style="margin-top:1%;margin-left:1%">
+         <div class="navbar-form">
+              <div class="btn-toolbar  navbar-right">
+                   <div class="btn-group" role="group" ng-show = "selectedItemIndex() > -1">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-toggle="tooltip" title='"{{eModulesList()[selectedItemIndex()].intitulee}}"' data-target="#apercuModal" ng-click="apercu()">
+                                    <span class="ft ft-eye" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" ng-if="getPermision(eModulesList()[selectedItemIndex()]._id)=='w'" class="btn btn-danger" data-toggle="modal" data-toggle="tooltip" title='Editer "{{eModulesList()[selectedItemIndex()].intitulee}}"' data-target="#editeModal" ng-click="edite()">
+                                    <span class="ft ft-edit-2" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" ng-if='eModulesList()[selectedItemIndex()].createdBy._id == user()._id' class="btn btn-secondary" data-toggle="modal" data-toggle="tooltip" title='Partager "{{eModulesList()[selectedItemIndex()].intitulee}}"' data-target="#shareModal" ng-click="share()">
+                                    <span class="ft ft-share-2" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" ng-if='eModulesList()[selectedItemIndex()].createdBy._id == user()._id' class="btn btn-danger" data-toggle="modal" data-toggle="tooltip" title='Supprimer "{{eModulesList()[selectedItemIndex()].intitulee}}"' data-target="#deleteModal">
+                                    <span class="ft ft-trash-2" aria-hidden="true"></span>
+                            </button>
+                    </div>
+                    
+                    <div class="btn-group" role="group">
+                              
+                            <div class="dropdown">
+                                    <button class="btn" ng-class="{'btn-primary' : header.newNotifCount()}" type="button" data-toggle="dropdown" ng-show="header.eModuleNotif().length">
+                                            <span class="ft ft-bell" aria-hidden="true"></span>
+                                            <span class="badge" ng-show="header.newNotifCount()">{{header.newNotifCount()}}</span>
+                                    </button>
+                                    <ul class="dropdown-menu notifications" role="menu" aria-labelledby="dLabel">
+                                        <div class="notification-heading">
+                                            <h4 class="menu-title">Notifications</h4>
+                                        </div>
+                                        <li class="divider"></li>
+                                        <div class="notifications-wrapper">
+                                            <a ng-repeat="notif in header.eModuleNotif() | orderBy :'-date'" class="content" href="#!/Gest-Filiere/eModule">
+                                                <div  ng-class="{'notification-item' : notif.status == 'unseen','notification-item-seen' : notif.status == 'seen'}" ng-click="notifClick(notif);notif.status = 'seen'">
+                                                    <div class="item-info">
+                                                        <h4 ng-if='notif.typee == "delete"'>
+                                                            {{notif.prof.nom}} {{notif.prof.prenom}} a supprimer {{notif.intitulee}}
+                                                        </h4>
+                                                        <h4 ng-if='notif.typee == "share"'  >
+                                                            {{notif.prof.nom}} {{notif.prof.prenom}} a partager avec vous {{notif.eModule.intitulee}}
+                                                            <span class="glyphicon glyphicon-{{getPermision(notif.eModule._id)=='w'?'edit':'eye-open'}}" aria-hidden="true"></span>
+                                                        </h4>
+                                                        <h4 ng-if='notif.typee == "update"'>
+                                                            {{notif.prof.nom}} {{notif.prof.prenom}} a mis a jour {{notif.eModule.intitulee}}
+                                                        </h4>
+                                                        <h6>{{notif.date}}</h6>
+                                                    </div>
+                                                </div>
+                                                <li class="divider"></li>
+                                            </a>
+                                        </div>
+                                    </ul>
+                             </div>
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </div> 

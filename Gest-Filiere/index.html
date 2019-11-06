@@ -1,0 +1,46 @@
+<div data-scroll-to-active="true" class="main-menu menu-fixed menu-dark menu-accordion menu-shadow">
+    <div class="main-menu-content">
+        <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
+   
+           
+            <li class="nav-item">
+                <a ui-sref=".eModule">
+                    <i class="ft-command"></i>
+                    <span data-i18n=""><strong>Elément de module</strong>
+                        <span class="badge badge badge-primary badge-pill float-right mr-2">{{eModuleNotifCount()}}</span>
+                    <span class="badge badge badge-primary badge-pill float-right mr-2">{{eModulesList().length}}</span>
+                    </span>
+                </a>
+            </li>
+            
+            <li class=" nav-item">
+                <a ui-sref=".module">
+                    <i class="ft-calendar"></i>
+                    <span data-i18n=""><strong>Module</strong>
+                        <span class="badge badge badge-danger badge-pill float-right mr-2">{{moduleNotifCount()}}</span>
+                    <span class="badge badge badge-danger badge-pill float-right mr-2">{{modulesList().length}}</span>
+                    </span>
+                </a>
+            </li>
+           
+            <li class=" nav-item">
+                <a ui-sref=".filiere" ng-if='user().security_mask>1'>
+                    <i class="ft-layers"></i>
+                    <span data-i18n=""><strong>Filière</strong></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="app-content content">
+    <div class="content-wrapper">
+        <div class="content-body">
+            <section class="card">
+                <div class="card-content"></div>
+                        <div ui-view></div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <script src="Gest-Filiere/CDN/download.js"></script>
+</div>

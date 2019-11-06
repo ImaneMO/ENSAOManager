@@ -1,0 +1,554 @@
+<div style="margin-left:8%;margin-right:8%;margin-top: 0%">
+  <!-- barre des paramètres -->
+  <div class="navbar navbar-expand-sm bg-info" role="navigation">
+    <legend class="navbar-brand text-white">
+      <h1><strong><span class="ft ft-settings"></span>
+        Paramètres</strong></h1></legend>
+        <a class="btn btn-white text-info border-info" href="/ComptesUpload" title="Importer utilisateur"><span class="ft ft-download  text-info "></span></a>
+         <a class="btn btn-white text-info border-info" href="/ComptesDownload/files" title="Exporter utilisateur sous format xlsx"><span class="ft ft-upload  text-info "></span></a>
+        <button type="button" class="btn  btn-white text-info border-info" title="Créer utilisateur" ng-click="add()" ng-disabled="addVisible" ><span class="ft ft-user-plus  text-info"></span></button>
+        <button type="button" id="ajouterparametre" class="btn btn-white text-info border-info" title="Ajouter paramètres" ng-click="Adduniv()" ng-disabled="adduniv"><span class="ft ft-settings" ></span></button>
+       
+  </div>
+  
+  <nav class="navbar navbar-light" style="background-color: #e3f2fd;"></nav>
+    <div class="adduser">
+      <form ng-show="addVisible"  name="userForm">
+         <fieldset>
+          <table class="table border">
+            <section class="basic-elements" class="adduser">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="text-center">
+                       <h1><strong><span class="ft ft-user-plus"style="width:30%"></span></span></h1>
+                     </div>
+                  </div>
+                  <div class="card-content">
+                    <div class="card-body">
+                      <div class="row">
+                            <div class="col-md-6">
+                              <fieldset class="form-group">
+                              <div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
+                              <label class="control-label " for="nom"><h3><strong>Nom : </strong></h3></label>
+                              <input type="text" class="form-control" ng-model="user.nom" name="name" required/>
+                              <p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">Veuillez saisir votre nom!</p>
+                              </div>
+                              </fieldset>
+                            </div>
+                   
+                            <div class="col-md-6">
+                            <fieldset class="form-group">
+                            <div class="form-group" ng-class="{ 'has-error' : userForm.prenom.$invalid && !userForm.prenom.$pristine }">
+                            <label class="control-label " for="prenom"><h3><strong>Prénom :</strong></h3></label>
+                            <input type="text" class="form-control" ng-model="user.prenom" name="prenom" required/>
+                            <p ng-show="userForm.prenom.$invalid && !userForm.prenom.$pristine" class="help-block">veuillez saisir votre prénom!</p>
+                            </div>
+                            </fieldset>
+                            </div>
+                    </div>
+
+                       <div class="row">
+                            <div class="col-md-6">
+                            <fieldset class="form-group">
+                            <div class="form-group" ng-class="{ 'has-error' : userForm.username.$invalid && !userForm.username.$pristine }">
+                            <label class="control-label " for="username"><h3><strong>Identifiant :</strong></h3></label>
+                            <input type="text" class="form-control" ng-model="user.username" name="username" ng-minlength="4" required/>
+                            <p ng-show="userForm.username.$error.minlength" class="help-block">Identifaint est trop court!</p>
+                            </div>
+                            </fieldset>
+                            </div>
+                   
+                            <div class="col-md-6">
+                            <fieldset class="form-group">
+                            <div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
+                            <label class="control-label requiredField" for="email"><h3><strong>Email :</strong></h3></label>
+                            <input type="email" class="form-control" ng-model="user.email" name="email" />
+                            <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">veuillez entrer Un email valide!</p>
+                            </div>
+                            </fieldset>
+                            </div>
+                      </div>
+
+                      <div class="row">
+                            <div class="col-md-6">
+                            <fieldset class="form-group">
+                            <div class="form-group" ng-class="{ 'has-error' : userForm.password.$invalid && !userForm.password.$pristine }">
+                             <label class="control-label " for="password"><h3><strong>Mot de passe :</strong></h3></label>
+                            <input type="text" class="form-control" ng-model="user.password" name="password" required/>
+                            <p ng-show="userForm.password.$invalid && !userForm.password.$pristine" class="help-block">veuillez entrer un mot de passe!</p>
+                            </div>
+                            </fieldset>
+                            </div>
+                   
+                            <div class="col-md-6">
+                            <fieldset class="form-group">
+                            <label class="control-label " for="tel"><h3><strong>Tél :</strong></h3></label>
+                            <input type="text" class="form-control" ng-model="user.tel" />
+                            </fieldset>
+                            </div>
+                      </div>
+
+
+                      <div class="row">
+                            <div class="col-md-6">
+                            <fieldset class="form-group">
+                            <label class="control-label " for="type"><h3><strong>Type :</strong></h3></label>
+                            <select class="form-control" id="exampleSelect1" ng-model="user.selectedtype">
+                            <option ng-repeat="type in TypeList">{{type}}</option>
+                            </select>
+                            </fieldset>
+                            </div>
+                   
+                            <div class="col-md-6">
+                            <fieldset class="form-group" ng-show="grade()">
+                            <label class="control-label " for="subject"><h3><strong>Grade :</strong></h3></label>
+                            <select class="form-control" id="exampleSelect1" ng-model="user.selectedgrade">
+                            <option ng-repeat="grade in GradeList">{{grade}}</option>
+                            </select>
+                            </fieldset>
+                            </div>
+                      </div>
+
+                   <div class="row">
+
+                    
+                    <div class="col-md-8 ">
+                    <label class="control-label " for="type"><h3><strong> Rôle :</strong></h3></label>
+                    <div  ng-class="{ 'has-error' : userForm.mask.$invalid && !userForm.mask.$pristine }">      
+                    <div class="row">
+                      <fieldset class="checkboxsas">
+                        <label>
+                        <input ng-model="user.maskprof" type="checkbox" id="professeur" />
+                        Professeur  
+                        </label>
+                      </fieldset>
+                      <fieldset class="checkbox">
+                        <label>
+                        <input ng-model="user.maskchefFil" type="checkbox" id="chefFilliere" />
+                        Chef de fillière
+                        </label>
+                      </fieldset>
+                      <fieldset class="checkbox disabled">
+                        <label>
+                        <input ng-model="user.maskchefDepart" type="checkbox" id="chefDepartement" />
+                        Chef de département
+                        </label>
+                      </fieldset>
+                      <fieldset class="checkbox disabled">
+                        <label>
+                        <input ng-model="user.maskadmin" type="checkbox" id="chefDepartement" />
+                        Administrateur
+                        </label>
+                      </fieldset>
+                    </div>
+                    </div>  
+                    </div>    
+                    </div>
+                        
+                  
+                    <div class="row">
+                      <div class="col-md-4" align="center">
+                        <fieldset class="form-group ">
+                            <button class="btn btn-info   border-info pull-left"  ng-click="valider()" ng-disabled="userForm.$invalid">Ajouter</button>
+                            <button class="btn btn-danger   border-danger " ng-click="hideAdd()">Annuler</button>
+                          </fieldset>
+                        </div>
+                      </div>
+                    
+                
+                      </div>
+
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </section>
+         
+            </table>
+          </fieldset>
+        </form>
+      </div>
+
+
+
+
+
+
+      <div ng-class="expression"="adduser">
+            <form ng-show="adduniv" name="univForm">
+          <fieldset>
+           <table class="table parametre text-centered">
+      
+             
+          <section class="basic-elements" class="adduser">
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header text-centered">
+                      <div class="text-center">
+                          <h1><strong><span class="ft ft-settings"style="width:30%"></span>
+                          </strong></h1>
+                        </div>
+                  </div>
+                  <div class="card-content">
+                    <div class="card-body">
+
+                      <div class="row">
+
+                            <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                          <fieldset class="form-group">
+                           <div class="form-group" ng-class="{ 'has-error' : univForm.name.$invalid && !univForm.name.$pristine }">
+                             <label class="control-label " for="nom"><h3><strong>Université :</strong></h3></label>
+                    <input type="text" class="form-control" ng-model="univ.nom" name="name" required/>
+                    <p ng-show="univForm.name.$invalid && !univForm.name.$pristine" class="help-block">veuillez entrer le nom de l'université.</p>
+                          </fieldset>
+                        </div>
+                   
+                            <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                          <fieldset class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error' : univForm.abv.$invalid && !univForm.abv.$pristine }">
+                          <label class="control-label " for="abrev"><h3><strong>Abréviation :</strong></h3></label>
+                    <input type="text" class="form-control" ng-model="univ.abrev" name="abv" maxlength="8" />
+                        </div>
+                          </fieldset>
+                        </div>
+                
+                      </div>
+
+                       <div class="row">
+
+                        <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                          <fieldset class="form-group">
+                           <div class="form-group" ng-class="{ 'has-error' : univForm.etab.$invalid && !univForm.etab.$pristine }">
+                            <label class="control-label " for="nom"><h3><strong>Etablissement :</strong></h3></label>
+                    <input type="text" class="form-control" ng-model="etab.nom" name="etab" required/>
+                    <p ng-show="univForm.etab.$invalid && !univForm.etab.$pristine" class="help-block">Veuillez entrer le nom de l'établissement.</p>
+                            </div>
+                          </fieldset>
+                        </div>
+                   
+                            <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                          <fieldset class="form-group">
+                            <div class="form-group" ng-class="{ 'has-error' : univForm.etababrev.$invalid && !univForm.etababrev.$pristine }">
+                              <label class="control-label " for="etababrev"><h3><strong>Abréviation :</strong></h3></label>
+                    <input type="text" class="form-control" ng-model="etab.abrev" name="etababrev" maxlength="8" />
+                         </div>
+                          </fieldset>
+                        </div>
+
+
+                        <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                          <fieldset class="form-group">
+                         <button class="btn btn-info inline" ng-click="Addetab()">
+                  <span class="ft ft-plus text-white" title="Ajouter un autre Etablissement">
+                        </button>
+                
+                          </fieldset>
+                        </div>
+                
+                      </div>
+
+                      <div class="row" ng-repeat="etab in addetab track by $index">
+
+                           <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                          <fieldset class="form-group">
+                              <label class="control-label " for="etab"><h3><strong>Autre Etablissement :</strong></h3></label>
+                              <input type="text" class="form-control" ng-model="addetab[$index].nom" />
+                          </fieldset>
+                        </div>
+                   
+                         <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                          <fieldset class="form-group">
+                           <label class="control-label requiredField" for="etababv"><h3><strong>Abréviation :</strong></h3></label>
+                            <input type="text" class="form-control" ng-model="addetab[$index].abrev" maxlength="8" />
+                          </fieldset>
+                        </div>
+
+                         <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                          <fieldset class="form-group">
+                          <button class="btn btn-info inline" ng-click="deletab($index)">
+                           <span class="ft ft-minus text-white" title="supprimer Etablissement">
+                          </button>
+                          </fieldset>
+                        </div>
+                      </div>
+
+
+                        <div class="row">
+                         <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                          <fieldset class="form-group">
+                            <div class="form-group" ng-class="{ 'has-error' : univForm.dep.$invalid && !univForm.dep.$pristine }">
+                            <label class="control-label " for="nom"><h3><strong>Département :</strong></h3></label>
+                    <input type="text" class="form-control" ng-model="dep.nom" name="dep" required/>
+                    <p ng-show="univForm.dep.$invalid && !univForm.dep.$pristine" class="help-block">Veuillez entrer le nom de département.</p>
+                          </fieldset>
+                        </div>
+                   
+                           <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                          <fieldset class="form-group">
+                             <div class="form-group" ng-class="{ 'has-error' : univForm.depabrev.$invalid && !univForm.depabrev.$pristine }">
+                            <label class="control-label " for="etababrev"><h3><strong>Abréviation :</strong></h3></label>
+                    <input type="text" class="form-control" ng-model="dep.abrev" name="depabrev" maxlength="8" />
+                          </fieldset>
+                        </div>
+
+                       <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                          <fieldset class="form-group">
+                          <button class="btn btn-info inline" ng-click="Addep()">
+                          <span class="ft ft-plus" title="Ajouter une autre departement">
+                         </button>
+                
+                          </fieldset>
+                        </div>
+                
+                      </div>
+
+                            <div class="row"  ng-repeat="dep in adddep track by $index">
+
+                           <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                          <fieldset class="form-group">
+                           <label class="control-label " for="etab"><h3><strong>Autre Département :</strong></h3></label>
+                  <input type="text" class="form-control" ng-model="adddep[$index].nom" />
+                          </fieldset>
+                        </div>
+                   
+                         <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                          <fieldset class="form-group" >
+                            <label class="control-label requiredField" for="depabv"><h3><strong>Abréviation :</strong></h3></label>
+                  <input type="text" class="form-control" ng-model="adddep[$index].abrev" maxlength="8" />
+                          </fieldset>
+                        </div>
+
+
+                        <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                          <fieldset class="form-group" >
+                           <button class="btn btn-info inline" ng-click="deldep($index)">
+                    <span class="ft ft-minus" title="supprimer departement">
+                          </fieldset>
+                        </div>
+                         </div>
+                        <div class="row">
+
+                             <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                          <fieldset class="form-group">
+                              <button class="btn btn-info" ng-click="ajouteruniv()" ng-disabled="univForm.$invalid">Valider</button>
+                  <button class="btn btn-danger" ng-click="hideAddUniv()">Annuler</button>
+                          </fieldset>
+                        </div>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+            </table>
+          </fieldset>
+        </form>
+      </div>
+<br/>
+
+
+
+
+     
+
+
+      <!-- Table -->
+      <fieldset class="list">
+          <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+            <table class="text-centered">
+            <td><legend><h2><strong>Liste Professeurs </strong></h2></legend></td>
+            <td><strong></strong></td>
+            <td> 
+             <div role="group" class="btn btn-lg pull-right" width="60%">
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-lg-2 pull-right" ng-model="q" type="search" placeholder="Rechercher par Nom ..." aria-label="Search">
+                </form>
+              </div>
+            </td>
+          </table>
+          </nav>
+          <table class="table table-info table-striped" style="background-color: #e3f2fd;">
+          <thead class="thead-info">
+            <hr>
+             <tr class="bg-info">
+              <th class="white"><legend><h3><strong>Nom</strong></h3></legend></th>
+              <th class="white"><legend><h3><strong>Prénom</strong></h3></legend></th>
+              <th class="white"><legend><h3><strong>Identifiant</strong></h3></legend></th>
+              <th class="white"><legend><h3><strong>Email</strong></h3></legend></th>
+              <th class="white"><legend><h3><strong>Rôle</strong></h3></legend></th>
+              <th class="white"><legend><h3><strong>Action</strong></h3></legend></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="a in items | filter:{nom:q} | orderBy:'nom' track by $index" ng-if="a.login!='Nan'">
+              <td class='input' ng-show="isEditable[$index]">
+                <input class="form-control" type="text" ng-model="tmpEdit[$index].nom" />
+              </td>
+              <td class='input' ng-show="isEditable[$index]">
+                <input class="form-control" type="text" ng-model="tmpEdit[$index].prenom" />
+              </td>
+              <td class='input' ng-show="isEditable[$index]">
+                <input class="form-control" type="text" ng-model="tmpEdit[$index].login" />
+              </td>
+             
+              <td class='input' ng-show="isEditable[$index]">
+                <input class="form-control" type="text" ng-model="tmpEdit[$index].email" />
+              </td>
+              <td class='input' ng-show="isEditable[$index]">
+                <button class="btn btn-success" ng-click="confirm($index,a)">Confirmer</button>
+                <button class="btn btn-info" ng-click="annuler($index)">Annuler</button>
+              </td>
+              
+              <td ng-hide="isEditable[$index]"><h4><strong>{{a.nom}}</strong></h4></td>
+              <td ng-hide="isEditable[$index]"><h4><strong>{{a.prenom}}</strong></h4></td>
+              <td ng-hide="isEditable[$index]"><h4><strong>{{a.login}}</strong></h4></td>
+              <td ng-hide="isEditable[$index]"><h4><strong>{{a.email}}</strong></h4></td>
+              
+              <td>
+                  <div class="dropdown">
+                      <button class="btn btn-md  bg-white dropdown-toggle border-info" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <i class="fa fa-tasks text-info "></i>
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li align="center" ng-click="privilege(a)" data-toggle="modal" data-target="#myModal">
+                          <a>Rôles</a>
+                        </li>
+                  </div>
+              </td>
+              <td ng-hide="isEditable[$index]">
+                <div class="row">
+                <button class="btn btn-md bg-white border-info" ng-click="editer(a,$index)"><span class="ft ft-edit-2 text-info "></span></button>
+                <button class="btn btn-md bg-white border-info" ng-click="delete(a)" data-toggle="modal" data-target="#myModal"> <span class="ft ft-trash-2  text-info"></span></button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </fieldset>
+
+
+      
+      <!-- afichage de la listes des parametres-->
+      <fieldset class="list">
+         
+                <br>
+              <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+                  <td><legend><h2><strong>Liste Paramètres</strong></h2></legend></td>
+              </nav>
+              <hr>
+            
+            
+        <table class="table table-striped  text-centered">
+          <thead class="bg-info">
+            <tr>
+              <th class="white"><h3><strong>Université</strong></h3></th>
+              <th class="white"><h3><strong>Etablissement</strong></h3></th>
+              <th class="white"><h3><strong>Département</strong></h3></th>
+              <th class="white"><h3><strong>Action</strong></h3></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="a in ListPrametre | orderBy:'nom' track by $index">
+             <td><ul><li><h4><strong>{{a.abrev}}</strong></h4></li></ul> </td>
+              <td>
+                <ul>
+                  <li ng-repeat="b in a.etablissements"><h4><strong>{{b.abrev}}</strong></h4></li>
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  <li ng-repeat="b in a.departements"><h4><strong>{{b.abrev}}</strong></h4></li>
+                </ul>
+              </td>
+              <td>
+                  <button class="btn btn-md bg-white border-info" ng-click="deleteP(a)" data-toggle="modal" data-target="#myModal"> 
+                    <span class="ft ft-trash-2  text-info"></span>
+                  </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      
+      </fieldset>
+    </div>
+
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+
+          <div ng-switch="lightboxContentSwitch">
+
+            <div ng-switch-when="delete" id="switchDelete" class="alert alert-danger center-block text-center">
+              <div class="modal-header">
+                <h3>Attention!</h3>
+              </div>
+              <div class="modal-body">
+                <h3>Voulez vous vraiment supprimer {{activeObj.nom}} {{activeObj.prenom}}</h3>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-danger" ng-click="confirmDelete(activeObj)" data-dismiss="modal">Confirmer</button>
+                <button class="btn btn-info" data-dismiss="modal">Annuler</button>
+              </div>
+            </div>
+
+            <div ng-switch-when="settings" id="switchSettings" class="alert alert-info center-block text-center">
+              <div class="modal-header">
+                <h3 class="text-center">{{activeObj.nom}} {{activeObj.prenom}}</h3>
+              </div>
+              <div class="modal-body">
+                <input type="checkbox" class="form-controller" id="professeur" ng-model="masks.prof" />
+                <label for="professeur">Professeur</label>
+                <br/>
+
+                <input type="checkbox" class="form-controller" id="chefFillier" ng-model="masks.filliere" />
+                <label for="chefFillier">chef de Filliere</label>
+                <br/>
+
+                <input type="checkbox" class="form-controller" id="chefDepartement" ng-model="masks.departement" />
+                <label for="chefDepartement">chef de departement</label>
+                <br/>
+
+                <input type="checkbox" class="form-controller" id="admin" ng-model="masks.admin" />
+                <label for="admin">Administrateur</label>
+                <br/>
+                <br/>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-info text-center" ng-click="confirmPrivilege()" data-dismiss="modal">Valider</button>
+                <button class="btn btn-warning text-center" data-dismiss="modal">Annuler</button>
+              </div>
+            </div>
+
+            <div ng-switch-when="matiere" id="switchDelete" class="alert alert-info center-block text-center">
+              <div class="modal-header">
+                <h3>Matieres de {{activeObj.nom}} {{activeObj.prenom}}</h3>
+              </div>
+              <div class="modal-body">
+                <h3 ng-repeat="a in test">{{a.nom}}</h3>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-danger" ng-click="" data-dismiss="modal">Confirmer</button>
+                <button class="btn btn-info" data-dismiss="modal">Annuler</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    
+
+    </div>
+  </div>

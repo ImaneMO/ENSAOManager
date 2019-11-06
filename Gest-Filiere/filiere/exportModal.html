@@ -1,0 +1,20 @@
+<!-- modale delete elemnt de module-->
+<div ng-controller="f_exportModalController" id="exportModal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-center">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div align="center">
+          <button type="button" class="btn btn-primary lg" data-dismiss="modal" ng-click="exporter()">Exporter filière</button>
+          <span>{{message}}</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>

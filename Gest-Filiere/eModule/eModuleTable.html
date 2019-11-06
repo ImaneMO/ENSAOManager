@@ -1,0 +1,43 @@
+
+<div ng-controller="e_eModuleTableController" class="table-responsive" ng-init="eModuleTable.init()">
+        <table class="table table-primary table-striped" style="background-color:#80cbc4;">
+                <thead class="thead-primary text-centered">
+                  <hr>
+                <tr class="bg-primary">
+                    <!--<th class="white">#{{refrechTable}}</th>-->
+                    <th class="white" width="40%"><legend><h3><strong>Intitulée</strong></h3></legend></th>
+                    <!--<th class="white">Propriétaire</th>-->
+                    <th class="white" width="50%"><legend><h3><strong>Date Modification</strong></h3></legend></th>
+                    <th class="white" width="20%"><h3><strong>Détails</strong></h3></th>
+                </tr>
+           </thead>
+           <tbody>
+                 <tr ng-repeat="eModule in eModuleTable.items() | filter : eModuleTable.search" ng-if="eModule.intitulee.length >0" class="{{eModule.status =='complet'?'tr_complet':'tr_incomplet'}}" ng-class="{'tr_active' : eModuleTable.selectedIndex == $index}" ng-mousedown="eModuleTable.clicked($index,eModule._id,eModule.intitulee)" context-menu="eModuleTable.menuOptions{{eModulesList()[selectedItemIndex()].createdBy._id == user()._id?'':getPermision(eModulesList()[selectedItemIndex()]._id)}}"  ng-click="eModuleTable.clicked($index,eModule._id,eModule.intitulee)">
+                    <!--<td>{{$index}}</td>-->
+                    <td><h4><strong>{{eModule.intitulee}}</strong></h4></td>
+                    <!--<td>{{eModule.createdBy._id==user()._id?'Vous':eModule.createdBy.nom+" "+eModule.createdBy.prenom}}</td>-->
+                    <td><h4><strong>{{eModule.lastUpdate | date:'dd/MM/yyyy HH:mm:ss'}}</strong></h4>
+                      <td>     <div ng-controller="e_headerController" role="navigation" ng-init=""><div class="btn-group" role="group" >
+                        <a ng-href="/app/#!/quiz/questions/{{eModule._id}}" class="btn btn-warning">Quiz</a>
+                        <button type="button" class="btn btn-info" data-toggle="modal" title='"{{eModulesList()[selectedItemIndex()].intitulee}}"' data-target="#apercuModal" ng-click="apercu()">
+                                  <span class="ft ft-eye" ></span>
+                          </button>
+                          <button type="button" class="btn btn-secondary" data-toggle="modal"  title='Partager "{{eModulesList()[selectedItemIndex()].intitulee}}"' data-target="#shareModal" ng-click="share()">
+                              <span class="ft ft-share-2" ></span>
+                      </button>
+                          <button type="button"  class="btn btn-success" data-toggle="modal" title='Editer "{{eModulesList()[selectedItemIndex()].intitulee}}"' data-target="#editeModal" ng-click="edite()">
+                                  <span class="ft ft-edit" aria-hidden="true"></span>
+                          </button>
+                    
+                          <button type="button" class="btn btn-danger" data-toggle="modal"  title='Supprimer "{{eModulesList()[selectedItemIndex()].intitulee}}"' data-target="#deleteModal">
+                                  <span class="ft ft-trash-2" ></span>
+                          </button>
+                  </div></div></td>
+                 </tr>
+            </tbody>
+       </table>   
+</div>
+</div>
+<!--<h6>{{eModule.createdBy._id==user()._id?'Vous':eModule.updatedBy.nom+" "+eModule.updatedBy.prenom}}</h6></td>-->
+                
+    

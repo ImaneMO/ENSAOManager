@@ -1,0 +1,64 @@
+<md-dialog aria-label="Add Topic" style="width:45%">
+  <form ng-cloak>
+    <md-toolbar class="bg-danger">
+      <div class="md-toolbar-tools">
+        <h3>
+          <strong>Ajouter un QCM</strong>
+        </h3>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()" style="margin-top:0px">
+          <i class="ft-x"></i>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <form ng-submit="submit()">
+          <md-content layout="column" layout-padding>
+
+            <md-input-container>
+              <label>Nom de QCM</label>
+              <input type="text" ng-model="topic.name" required>
+
+            </md-input-container>
+            <md-input-container>
+              <label>Nombre de Questions</label>
+              <input type="number" ng-model="topic.count" required>
+            </md-input-container>
+
+            <md-input-container>
+              <label>Temps</label>
+              <input type="number" ng-model="topic.time" required>
+            </md-input-container>
+
+            <md-input-container>
+              <label>Date de Début</label>
+              <input type="datetime-local" ng-model="topic.startDate" required>
+            </md-input-container>
+
+            <md-input-container>
+              <label>Date de Fin</label>
+              <input type="datetime-local" ng-model="topic.endDate" required>
+            </md-input-container>
+
+            <md-input-container>
+              <label>Classes</label>
+              <br>
+              <select class="form-control" ng-model="topic.niveau" multiple>
+                <option ng-value="{{n}}" ng-repeat="n in niveaux">{{n}}</option>
+              </select>
+            </md-input-container>
+
+            <div layout="row" layout-align="center center">
+              <md-button type="reset" class="md-raised md-warn"> Réinitialiser
+              </md-button>
+              <md-button type="submit" class="md-raised md-primary" ng-click="submit()"> Soumettre
+              </md-button>
+            </div>
+        </form>
+      </div>
+    </md-dialog-content>
+
+  </form>
+</md-dialog>
